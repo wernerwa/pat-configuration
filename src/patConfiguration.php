@@ -1,4 +1,4 @@
-<?PHP
+<?php
 /**
  * patConfiguration
  *
@@ -88,81 +88,81 @@ define('PATCONFIGURATION_ERROR_FILE_NOT_WRITABLE', 20030);
  */
 class patConfiguration
 {
-   /**
-    * information about the project
-    * @var  array   $systemVars
-    */
-    var $systemVars = array(
+    /**
+     * information about the project
+     * @var  array   $systemVars
+     */
+    public $systemVars = array(
                             'appName'       =>  'patConfiguration',
                             'appVersion'    =>  '2.0.0',
                             'author'        =>  array(
                                                         'Stephan Schmidt <schst@php-tools.net>'
                                                     )
                                 );
-   /**
-    * array that stores configuration
-    * @var  array   $conf
-    */
-    var $conf = array();
+    /**
+     * array that stores configuration
+     * @var  array   $conf
+     */
+    public $conf = array();
 
-   /**
-    * directory, where the configuration files are stored
-    * @var  string
-    */
-    var $configDir;
+    /**
+     * directory, where the configuration files are stored
+     * @var  string
+     */
+    public $configDir;
 
-   /**
-    * directory where cache files are located
-    * @var  string  $cacheDir
-    */
-    var $cacheDir = 'cache';
+    /**
+     * directory where cache files are located
+     * @var  string  $cacheDir
+     */
+    public $cacheDir = 'cache';
 
-   /**
-    * directory where drivers are stored
-    * @var  string  $driverDir
-    */
-    var $driverDir = null;
+    /**
+     * directory where drivers are stored
+     * @var  string  $driverDir
+     */
+    public $driverDir = null;
 
-   /**
-    * drivers that have already been loaded
-    * @var  array   $drivers
-    */
-    var $drivers = array();
+    /**
+     * drivers that have already been loaded
+     * @var  array   $drivers
+     */
+    public $drivers = array();
 
-   /**
-    * default encoding
-    * @var  string  encoding
-    */
-    var $encoding = 'ISO-8859-1';
+    /**
+     * default encoding
+     * @var  string  encoding
+     */
+    public $encoding = 'ISO-8859-1';
 
-   /**
-    * options that can be used by the drivers
-    *
-    * @access   private
-    * @var      array
-    */
-    var $options = array(
+    /**
+     * options that can be used by the drivers
+     *
+     * @access   private
+     * @var      array
+     */
+    public $options = array(
                            'alwaysUseCache' => false
                        );
 
-   /**
-    * constructor
-    *
-    * @access   public
-    * @param    array   $options
-    */
-    function patConfiguration($options = array())
+    /**
+     * constructor
+     *
+     * @access   public
+     * @param    array   $options
+     */
+    public function patConfiguration($options = array())
     {
         $this->__construct($options);
     }
 
-   /**
-    * constructor for PHP 5
-    *
-    * @access   public
-    * @param    array   $options
-    */
-    function __construct($options = array())
+    /**
+     * constructor for PHP 5
+     *
+     * @access   public
+     * @param    array   $options
+     */
+    public function __construct($options = array())
     {
         foreach ($options as $name => $value) {
             $method = 'set'.ucfirst($name);
@@ -174,25 +174,25 @@ class patConfiguration
         }
     }
 
-   /**
-    * set the XML encoding
-    *
-    * @access   public
-    * @param    string  $encoding
-    */
-    function setEncoding($encoding)
+    /**
+     * set the XML encoding
+     *
+     * @access   public
+     * @param    string  $encoding
+     */
+    public function setEncoding($encoding)
     {
         $this->encoding = $encoding;
         return true;
     }
 
-   /**
-    * set the directory, where all config files are stored
-    *
-    * @access   public
-    * @param    string  $configDir  name of the directory
-    */
-    function setConfigDir($configDir)
+    /**
+     * set the directory, where all config files are stored
+     *
+     * @access   public
+     * @param    string  $configDir  name of the directory
+     */
+    public function setConfigDir($configDir)
     {
         if (!file_exists($configDir)) {
             return patErrorManager::raiseError(PATCONFIGURATION_ERROR_CONFIGDIR_NOT_FOUND, 'Config directory does not exist.', $configDir);
@@ -201,26 +201,26 @@ class patConfiguration
         return true;
     }
 
-   /**
-    * get the directory, where all config files are stored
-    *
-    * @access   public
-    * @return   string  $configDir  name of the directory
-    */
-    function getConfigDir()
+    /**
+     * get the directory, where all config files are stored
+     *
+     * @access   public
+     * @return   string  $configDir  name of the directory
+     */
+    public function getConfigDir()
     {
         return  $this->configDir;
     }
 
-   /**
-    * set the directory, where all drivers are stored
-    *
-    * @access   public
-    * @param    string  $driverDir  name of the directory
-    * @return   boolean
-    * @throws   patError
-    */
-    function setDriverDir($driverDir)
+    /**
+     * set the directory, where all drivers are stored
+     *
+     * @access   public
+     * @param    string  $driverDir  name of the directory
+     * @return   boolean
+     * @throws   patError
+     */
+    public function setDriverDir($driverDir)
     {
         if (!file_exists($driverDir)) {
             return patErrorManager::raiseError(PATCONFIGURATION_ERROR_DRIVERDIR_NOT_FOUND, 'Driver directory does not exist.', $driverDir);
@@ -229,15 +229,15 @@ class patConfiguration
         return true;
     }
 
-   /**
-    * set the directory, where all cache files are stored
-    *
-    * @access   public
-    * @param    string  $cacheDir   name of the directory
-    * @return   boolean
-    * @throws   patError
-    */
-    function setCacheDir($cacheDir)
+    /**
+     * set the directory, where all cache files are stored
+     *
+     * @access   public
+     * @param    string  $cacheDir   name of the directory
+     * @return   boolean
+     * @throws   patError
+     */
+    public function setCacheDir($cacheDir)
     {
         if (!file_exists($cacheDir)) {
             return patErrorManager::raiseError(PATCONFIGURATION_ERROR_CACHEDIR_NOT_WRITEABLE, 'Cache directory does not exist.', $cacheDir);
@@ -249,18 +249,18 @@ class patConfiguration
         return true;
     }
 
-   /**
-    * set any option
-    *
-    * This method checks, whether there is a method that should be called
-    * for the specific option
-    *
-    * @access public
-    * @param  string        name of the option
-    * @param  mixed         value of the option
-    * @return mixed
-    */
-    function setOption($option, $value)
+    /**
+     * set any option
+     *
+     * This method checks, whether there is a method that should be called
+     * for the specific option
+     *
+     * @access public
+     * @param  string        name of the option
+     * @param  mixed         value of the option
+     * @return mixed
+     */
+    public function setOption($option, $value)
     {
         $method = 'set'.ucfirst($option);
         if (is_callable(array($this, $method))) {
@@ -270,16 +270,16 @@ class patConfiguration
         return true;
     }
 
-   /**
-    * get an option
-    *
-    * This is only used by the drivers.
-    *
-    * @access   public
-    * @param    string  name of the option
-    * @return   mixed
-    */
-    function getOption($name)
+    /**
+     * get an option
+     *
+     * This is only used by the drivers.
+     *
+     * @access   public
+     * @param    string  name of the option
+     * @return   mixed
+     */
+    public function getOption($name)
     {
         if (!isset($this->options[$name])) {
             return null;
@@ -287,21 +287,21 @@ class patConfiguration
         return $this->options[$name];
     }
 
-   /**
-    * load a configuration
-    *
-    * this loads any config file, alias for parseConfigFile
-    *
-    * Possible options are:
-    * - mode (a|w)
-    * - filetype
-    *
-    * @access   public
-    * @param    string  $file   name of config file
-    * @param    string  $mode   options for loading the config
-    * @see  loadCachedConfig(), parseConfigFile()
-    */
-    function loadConfig($file, $options = array( 'mode' => 'w' ))
+    /**
+     * load a configuration
+     *
+     * this loads any config file, alias for parseConfigFile
+     *
+     * Possible options are:
+     * - mode (a|w)
+     * - filetype
+     *
+     * @access   public
+     * @param    string  $file   name of config file
+     * @param    string  $mode   options for loading the config
+     * @see  loadCachedConfig(), parseConfigFile()
+     */
+    public function loadConfig($file, $options = array( 'mode' => 'w' ))
     {
         //  older version accpeted only a string as mode parameter
         if (!is_array($options)) {
@@ -355,18 +355,18 @@ class patConfiguration
         return  true;
     }
 
-   /**
-    * load a configuration from a cache
-    *
-    * if cache is not valid, it will be updated automatically
-    *
-    * @access   public
-    * @param    string  $file       name of config file
-    * @param    string  $mode       options for loading the config
-    * @return   mixed   $success    True on success, patError object otherwise.
-    * @see  loadConfig()
-    */
-    function loadCachedConfig($file, $options = array( 'mode' => 'w' ))
+    /**
+     * load a configuration from a cache
+     *
+     * if cache is not valid, it will be updated automatically
+     *
+     * @access   public
+     * @param    string  $file       name of config file
+     * @param    string  $mode       options for loading the config
+     * @return   mixed   $success    True on success, patError object otherwise.
+     * @see  loadConfig()
+     */
+    public function loadCachedConfig($file, $options = array( 'mode' => 'w' ))
     {
         //  older version accepted only a string as mode parameter
         if (!is_array($options)) {
@@ -427,30 +427,30 @@ class patConfiguration
         return  true;
     }
 
-   /**
-    * parse a configuration file
-    *
-    * please use loadConfig instead
-    *
-    * @access   public
-    * @param    string  $file   name of the configuration file
-    * @param    string  $mode   options for loading the config
-    * @see  loadConfig(), loadCachedConfig()
-    * @deprecated   since v2.0
-    */
-    function parseConfigFile($file, $options = array( 'mode' => 'w' ))
+    /**
+     * parse a configuration file
+     *
+     * please use loadConfig instead
+     *
+     * @access   public
+     * @param    string  $file   name of the configuration file
+     * @param    string  $mode   options for loading the config
+     * @see  loadConfig(), loadCachedConfig()
+     * @deprecated   since v2.0
+     */
+    public function parseConfigFile($file, $options = array( 'mode' => 'w' ))
     {
         return  $this->loadConfig($file, $options);
     }
 
-   /**
-    * get the full path of a file
-    *
-    * @access   public
-    * @param    string  $file       filename
-    * @param    string  $relative   get path relative to this file
-    */
-    function getFullPath($file, $relative = null, $check = true)
+    /**
+     * get the full path of a file
+     *
+     * @access   public
+     * @param    string  $file       filename
+     * @param    string  $relative   get path relative to this file
+     */
+    public function getFullPath($file, $relative = null, $check = true)
     {
         $inConfigDir    =   false;
         //  is it a relative path
@@ -500,16 +500,16 @@ class patConfiguration
         return  $realPath;
     }
 
-   /**
-    * get a driver
-    *
-    * will load driver, if not already loaded
-    *
-    * @access   private
-    * @param    string  $filetype   type of file that should be read/written
-    * @param    string  $mode       mode of the driver (reader|writer)
-    */
-    function &_getDriver($filetype, $mode = 'Reader')
+    /**
+     * get a driver
+     *
+     * will load driver, if not already loaded
+     *
+     * @access   private
+     * @param    string  $filetype   type of file that should be read/written
+     * @param    string  $mode       mode of the driver (reader|writer)
+     */
+    public function &_getDriver($filetype, $mode = 'Reader')
     {
         if (!isset($this->drivers[$filetype])) {
             $this->drivers[$filetype]   =   array();
@@ -522,14 +522,14 @@ class patConfiguration
         return  $this->drivers[$filetype][$mode];
     }
 
-   /**
-    * load a driver
-    *
-    * @access   private
-    * @param    string  $filetype   type of file that should be read/written
-    * @param    string  $mode       mode of the driver (reader|writer)
-    */
-    function &_loadDriver($filetype, $mode = 'Reader')
+    /**
+     * load a driver
+     *
+     * @access   private
+     * @param    string  $filetype   type of file that should be read/written
+     * @param    string  $mode       mode of the driver (reader|writer)
+     */
+    public function &_loadDriver($filetype, $mode = 'Reader')
     {
         // include the base class
         $baseFile = sprintf('%s/%s.php', $this->getDriverDir(), $mode);
@@ -569,14 +569,14 @@ class patConfiguration
         return  $driver;
     }
 
-   /**
-    * load cache
-    *
-    * @access   private
-    * @param    string  $file   filename
-    * @return   mixed   $result config on success, false otherwise
-    */
-    function loadFromCache($file)
+    /**
+     * load cache
+     *
+     * @access   private
+     * @param    string  $file   filename
+     * @return   mixed   $result config on success, false otherwise
+     */
+    public function loadFromCache($file)
     {
         $cacheFile = $this->cacheDir . '/' . md5($file) . '.cache';
 
@@ -598,7 +598,7 @@ class patConfiguration
         $result = false;
         while (!feof($fp)) {
             $line = trim(fgets($fp, 4096));
-            list( $action, $param ) = explode('=', $line, 2);
+            list($action, $param) = explode('=', $line, 2);
 
             switch ($action) {
                 case 'checkFile':
@@ -625,15 +625,15 @@ class patConfiguration
         return  $result;
     }
 
-   /**
-    * write cache
-    *
-    * @access   private
-    * @param    string  $file   filename
-    * @param    array   $config configuration
-    * @param    array   $externalFiles  list of files used
-    */
-    function writeCache($file, $config, $externalFiles)
+    /**
+     * write cache
+     *
+     * @access   private
+     * @param    string  $file   filename
+     * @param    array   $config configuration
+     * @param    array   $externalFiles  list of files used
+     */
+    public function writeCache($file, $config, $externalFiles)
     {
         $cacheData = serialize($config);
         $cacheFile = $this->cacheDir . '/' . md5($file) . '.cache';
@@ -664,16 +664,16 @@ class patConfiguration
         return  true;
     }
 
-   /**
-    * write a configfile
-    *
-    *
-    * @access   public
-    * @param    string  $filename   name of the configfile
-    * @param    string  $format     format of the config file
-    * @param    array   $options    options, see the writer driver for details
-    */
-    function writeConfigFile($filename, $options = null, $oldOptions = null)
+    /**
+     * write a configfile
+     *
+     *
+     * @access   public
+     * @param    string  $filename   name of the configfile
+     * @param    string  $format     format of the config file
+     * @param    array   $options    options, see the writer driver for details
+     */
+    public function writeConfigFile($filename, $options = null, $oldOptions = null)
     {
         //  older versions needed the filetype as secand parameter
         if (!is_array($options)) {
@@ -730,29 +730,29 @@ class patConfiguration
         return true;
     }
 
-   /**
-    * get the filetype based on a filename
-    *
-    * @access   private
-    * @param    string  $filename
-    * @return   string  $filetype
-    */
-    function _getFileType($filename)
+    /**
+     * get the filetype based on a filename
+     *
+     * @access   private
+     * @param    string  $filename
+     * @return   string  $filetype
+     */
+    public function _getFileType($filename)
     {
         //  no filetype given, extract from filename
         return  substr(strrchr($filename, '.'), 1);
     }
 
-   /**
-    * convert a variable to any type
-    *
-    * @access   private
-    * @param    mixed       value that should be converted
-    * @param    string      type of the value (string, bool, integer, double, object)
-    * @param    array       options for the type conversion
-    * @return   mixed
-    */
-    function convertValue($value, $type = 'string', $options = array())
+    /**
+     * convert a variable to any type
+     *
+     * @access   private
+     * @param    mixed       value that should be converted
+     * @param    string      type of the value (string, bool, integer, double, object)
+     * @param    array       options for the type conversion
+     * @return   mixed
+     */
+    public function convertValue($value, $type = 'string', $options = array())
     {
         switch ($type) {
             //  string
@@ -827,16 +827,16 @@ class patConfiguration
         return  $value;
     }
 
-   /**
-    * returns a configuration value
-    *
-    * if no path is given, all config values will be returnded in an array
-    *
-    * @access   public
-    * @param    string  $path   path, where the value is stored
-    * @return   mixed   $value  value
-    */
-    function getConfigValue($path = '')
+    /**
+     * returns a configuration value
+     *
+     * if no path is given, all config values will be returnded in an array
+     *
+     * @access   public
+     * @param    string  $path   path, where the value is stored
+     * @return   mixed   $value  value
+     */
+    public function getConfigValue($path = '')
     {
         if ($path == '') {
             return  $this->conf;
@@ -873,26 +873,26 @@ class patConfiguration
         return  false;
     }
 
-   /**
-    * set a config value
-    *
-    * @access   public
-    * @param    string  $path   path, where the value will be stored
-    * @param    mixed   $value  value to store
-    */
-    function setConfigValue($path, $value, $type = 'leave')
+    /**
+     * set a config value
+     *
+     * @access   public
+     * @param    string  $path   path, where the value will be stored
+     * @param    mixed   $value  value to store
+     */
+    public function setConfigValue($path, $value, $type = 'leave')
     {
         $this->conf[$path]        = $this->convertValue($value, $type);
         $this->currentConf[$path] = $this->convertValue($value, $type);
     }
 
-   /**
-    * sets several config values
-    *
-    * @access   public
-    * @param    array   $values     assoc array containg paths and values
-    */
-    function setConfigValues($values)
+    /**
+     * sets several config values
+     *
+     * @access   public
+     * @param    array   $values     assoc array containg paths and values
+     */
+    public function setConfigValues($values)
     {
         if (!is_array($values)) {
             return  false;
@@ -902,15 +902,15 @@ class patConfiguration
         }
     }
 
-   /**
-    * clears a config value
-    *
-    * if no path is given, the complete config will be cleared
-    *
-    * @access   public
-    * @param    string  $path   path, where the value is stored
-    */
-    function clearConfigValue($path = '')
+    /**
+     * clears a config value
+     *
+     * if no path is given, the complete config will be cleared
+     *
+     * @access   public
+     * @param    string  $path   path, where the value is stored
+     */
+    public function clearConfigValue($path = '')
     {
         if ($path == '') {
             $this->conf = array();
@@ -922,7 +922,7 @@ class patConfiguration
             $path       =   '^'.str_replace('*', '.*', $path).'$';
             $values     =   array();
             reset($this->conf);
-            while (list( $key, $value ) = each($this->conf)) {
+            while (list($key, $value) = each($this->conf)) {
                 if (eregi($path, $key)) {
                     unset($this->conf[$key]);
                 }
@@ -945,7 +945,7 @@ class patConfiguration
     * @access   public
     * @return   string  $driverDir  driver directory
     */
-    function getDriverDir()
+    public function getDriverDir()
     {
         if ($this->driverDir == null) {
             $currentDir      = dirname(__FILE__);

@@ -26,77 +26,77 @@
  */
 class patExampleGen
 {
-   /**
-    * Stores all request variables
-    *
-    * @access   private
-    * @var      array
-    * @see      setSections()
-    */
-    var $vars = array();
+    /**
+     * Stores all request variables
+     *
+     * @access   private
+     * @var      array
+     * @see      setSections()
+     */
+    public $vars = array();
     
-   /**
-    * Stores the sections collection to generate
-    * the examples navigation from
-    *
-    * @access   private
-    * @var      array
-    */
-    var $sections = array();
+    /**
+     * Stores the sections collection to generate
+     * the examples navigation from
+     *
+     * @access   private
+     * @var      array
+     */
+    public $sections = array();
     
-   /**
-    * The XML_Beautifier class - used if installed to display
-    * XML output in a nice readable format with indentation.
-    *
-    * @access   private
-    * @var      object
-    */
-    var $beautifier = false;
+    /**
+     * The XML_Beautifier class - used if installed to display
+     * XML output in a nice readable format with indentation.
+     *
+     * @access   private
+     * @var      object
+     */
+    public $beautifier = false;
     
-   /**
-    * Stores the tabs configuration used to create the tabnavigation
-    * for each example.
-    *
-    * @access   private
-    * @var      array
-    * @see      setTabs()
-    */
-    var $tabs = array();
+    /**
+     * Stores the tabs configuration used to create the tabnavigation
+     * for each example.
+     *
+     * @access   private
+     * @var      array
+     * @see      setTabs()
+     */
+    public $tabs = array();
     
-   /**
-    * Stores the name of the application
-    *
-    * @access   private
-    * @var      string
-    * @see      setAppName()
-    */
-    var $appName = 'Unknown';
+    /**
+     * Stores the name of the application
+     *
+     * @access   private
+     * @var      string
+     * @see      setAppName()
+     */
+    public $appName = 'Unknown';
     
-   /**
-    * Stores the description of the application
-    *
-    * @access   private
-    * @var      string
-    * @see      setAppDescription()
-    */
-    var $appDescription = '';
+    /**
+     * Stores the description of the application
+     *
+     * @access   private
+     * @var      string
+     * @see      setAppDescription()
+     */
+    public $appDescription = '';
 
-   /**
-    * Stores the ID of the application's forum
-    *
-    * @access   private
-    * @var      int
-    * @see      setAppForumId()
-    */
-    var $appForumId = 0;
+    /**
+     * Stores the ID of the application's forum
+     *
+     * @access   private
+     * @var      int
+     * @see      setAppForumId()
+     */
+    public $appForumId = 0;
     
-   /**
-    * Main process method that dispatches needed tasks according
-    * to the given action.
-    *
-    * @access   public
-    */
-    function process()
+    /**
+     * Main process method that dispatches needed tasks according
+     * to the given action.
+     *
+     * @access   public
+     */
+    public function process()
     {
         $this->vars = $this->getRequestVars();
     
@@ -124,76 +124,76 @@ class patExampleGen
         }
     }
     
-   /**
-    * Retrieves the request variables from POST and GET
-    *
-    * @access   public
-    * @return   array   $requestVars    The request vars
-    */
-    function getRequestVars()
+    /**
+     * Retrieves the request variables from POST and GET
+     *
+     * @access   public
+     * @return   array   $requestVars    The request vars
+     */
+    public function getRequestVars()
     {
         return array_merge($_POST, $_GET);
     }
     
-   /**
-    * Sets the default tab configuration that will be used for
-    * each example page. Additional tabs can be defined for each
-    * example within the section definition.
-    *
-    * @access   public
-    * @param    array   $tabs   The tab configuration
-    * @see      $tabs
-    */
-    function setTabs($tabs)
+    /**
+     * Sets the default tab configuration that will be used for
+     * each example page. Additional tabs can be defined for each
+     * example within the section definition.
+     *
+     * @access   public
+     * @param    array   $tabs   The tab configuration
+     * @see      $tabs
+     */
+    public function setTabs($tabs)
     {
         $this->tabs = $tabs;
     }
     
-   /**
-    * Sets the name of the application
-    *
-    * @access   public
-    * @param    string  $appName    The name
-    * @see      $appName
-    */
-    function setAppName($appName)
+    /**
+     * Sets the name of the application
+     *
+     * @access   public
+     * @param    string  $appName    The name
+     * @see      $appName
+     */
+    public function setAppName($appName)
     {
         $this->appName = $appName;
     }
     
-   /**
-    * Sets the description of the application
-    *
-    * @access   public
-    * @param    string  $desc   The description text
-    * @see      $appDescription
-    */
-    function setAppDescription($desc)
+    /**
+     * Sets the description of the application
+     *
+     * @access   public
+     * @param    string  $desc   The description text
+     * @see      $appDescription
+     */
+    public function setAppDescription($desc)
     {
         $this->appDescription = $desc;
     }
     
-   /**
-    * Sets the ID of the application's forum. Needed to display
-    * the correct link to the forum.
-    *
-    * @access   public
-    * @param    int     $id     The forum ID
-    * @see      $appForumId
-    */
-    function setAppForumId($id)
+    /**
+     * Sets the ID of the application's forum. Needed to display
+     * the correct link to the forum.
+     *
+     * @access   public
+     * @param    int     $id     The forum ID
+     * @see      $appForumId
+     */
+    public function setAppForumId($id)
     {
         $this->appForumId = $id;
     }
     
-   /**
-    * Retrieves the default example view tab, the one
-    * that is active when the page is loaded.
-    *
-    * @access   public
-    * @return   string  $tabId  The ID of the tab
-    */
-    function getDefaultTab($tabs)
+    /**
+     * Retrieves the default example view tab, the one
+     * that is active when the page is loaded.
+     *
+     * @access   public
+     * @return   string  $tabId  The ID of the tab
+     */
+    public function getDefaultTab($tabs)
     {
         foreach ($tabs as $tabId => $tabDef) {
             if ($tabDef['default']) {
@@ -206,25 +206,25 @@ class patExampleGen
         return key($tabs);
     }
     
-   /**
-    * Custom error handler that is set automatically to display
-    * any patError error objets within the examples collection.
-    *
-    * Displays:
-    * - Error level
-    * - Error Message
-    * - Error info
-    * - Error file
-    * - Error line
-    * - plus the call stack that lead to the error
-    *
-    * @author   Sebastian Mordziol <argh@php-tools.net>
-    * @access   public
-    * @static
-    * @param    object      error object
-    * @return   object      error object
-    */
-    function &displayError(&$error)
+    /**
+     * Custom error handler that is set automatically to display
+     * any patError error objets within the examples collection.
+     *
+     * Displays:
+     * - Error level
+     * - Error Message
+     * - Error info
+     * - Error file
+     * - Error line
+     * - plus the call stack that lead to the error
+     *
+     * @author   Sebastian Mordziol <argh@php-tools.net>
+     * @access   public
+     * @static
+     * @param    object      error object
+     * @return   object      error object
+     */
+    public function &displayError(&$error)
     {
         $prefix = 'arghDebug';
         
@@ -320,12 +320,12 @@ class patExampleGen
         exit();
     }
 
-   /**
-    * Displays an example page along with all defined tabs
-    *
-    * @access   public
-    */
-    function displayExample()
+    /**
+     * Displays an example page along with all defined tabs
+     *
+     * @access   public
+     */
+    public function displayExample()
     {
         if (!isset($this->vars['example'])) {
             die('No example selected.');
@@ -434,19 +434,19 @@ class patExampleGen
         $this->displayFooter();
     }
     
-   /**
-    * Display an example's output in an example tab via an iframe
-    *
-    * @access   public
-    * @param    string  $tabId  The ID of the tab
-    * @param    string  $file   The file to show
-    */
-    function displayOutput($tabId, $file)
+    /**
+     * Display an example's output in an example tab via an iframe
+     *
+     * @access   public
+     * @param    string  $tabId  The ID of the tab
+     * @param    string  $file   The file to show
+     */
+    public function displayOutput($tabId, $file)
     {
         echo '<iframe class="exampleContent" style="display:none;" id="'.$tabId.'" src="'.$file.'"></iframe>';
     }
     
-    function displayGuide($tabId, $file, $guide)
+    public function displayGuide($tabId, $file, $guide)
     {
         $file = explode("\n", $this->file_get_contents($file));
 
@@ -467,7 +467,7 @@ class patExampleGen
 
         foreach ($guide as $row => $entry) {
             $slice = explode('-', $entry['lines']);
-            $hilight = implode("\n", array_slice($file, ( $slice[0] -1 ), ( $slice[1] - $slice[0] ) + 1));
+            $hilight = implode("\n", array_slice($file, ($slice[0] -1), ($slice[1] - $slice[0]) + 1));
 
             ob_start();
             highlight_string('<?php'.$hilight.'?>');
@@ -496,42 +496,42 @@ class patExampleGen
         echo '</div>';
     }
 
-   /**
-    * Display PHP source code in an example tab
-    *
-    * @access   public
-    * @param    string  $tabId  The ID of the tab
-    * @param    string  $file   The file to hilight
-    */
-    function displayPHPSource($tabId, $file)
+    /**
+     * Display PHP source code in an example tab
+     *
+     * @access   public
+     * @param    string  $tabId  The ID of the tab
+     * @param    string  $file   The file to hilight
+     */
+    public function displayPHPSource($tabId, $file)
     {
         echo '<div class="exampleContent" id="'.$tabId.'">';
         highlight_file($file);
         echo '</div>';
     }
     
-   /**
-    * Display a free text in a tab
-    *
-    * @access   public
-    * @param    string  $tabId  The ID of the tab
-    * @param    string  $text   The text to display
-    */
-    function displayText($tabId, $text)
+    /**
+     * Display a free text in a tab
+     *
+     * @access   public
+     * @param    string  $tabId  The ID of the tab
+     * @param    string  $text   The text to display
+     */
+    public function displayText($tabId, $text)
     {
         echo '<div class="exampleContent" id="'.$tabId.'">';
         echo $text;
         echo '</div>';
     }
 
-   /**
-    * Display XML source code in an example tab
-    *
-    * @access   public
-    * @param    string  $tabId  The ID of the tab
-    * @param    string  $file   The file to hilight
-    */
-    function displayXMLSource($tabId, $file)
+    /**
+     * Display XML source code in an example tab
+     *
+     * @access   public
+     * @param    string  $tabId  The ID of the tab
+     * @param    string  $file   The file to hilight
+     */
+    public function displayXMLSource($tabId, $file)
     {
         $url = str_replace('index.php', $file, 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
     
@@ -545,26 +545,26 @@ class patExampleGen
         echo '</div>';
     }
     
-   /**
-    * Hilights an xml string and displays it
-    *
-    * @access   public
-    * @param    string  $xml    The XML string
-    * @see      highlightXML()
-    */
-    function displayXMLString($xml)
+    /**
+     * Hilights an xml string and displays it
+     *
+     * @access   public
+     * @param    string  $xml    The XML string
+     * @see      highlightXML()
+     */
+    public function displayXMLString($xml)
     {
         echo $this->highlightXML($xml);
     }
     
-   /**
-    * Highlights an xml string and returns the highlighted source
-    *
-    * @access   public
-    * @param    string  $xml    The XML string
-    * @return   string  $xml    The highlighted string
-    */
-    function highlightXML($xml)
+    /**
+     * Highlights an xml string and returns the highlighted source
+     *
+     * @access   public
+     * @param    string  $xml    The XML string
+     * @return   string  $xml    The highlighted string
+     */
+    public function highlightXML($xml)
     {
         @include_once('XML/Beautifier.php');
         
@@ -587,12 +587,12 @@ class patExampleGen
         return $xml;
     }
 
-   /**
-    * Displays the examples main frameset
-    *
-    * @access   public
-    */
-    function displayFrameset()
+    /**
+     * Displays the examples main frameset
+     *
+     * @access   public
+     */
+    public function displayFrameset()
     {
         echo '<html>';
         echo '<head>';
@@ -605,23 +605,23 @@ class patExampleGen
         echo '</html>';
     }
 
-   /**
-    * Sets the sections from which to generate the examples framework
-    *
-    * @access   public
-    * @param    array   &$sections  The sections definition
-    */
-    function setSections($sections)
+    /**
+     * Sets the sections from which to generate the examples framework
+     *
+     * @access   public
+     * @param    array   &$sections  The sections definition
+     */
+    public function setSections($sections)
     {
         $this->sections = $sections;
     }
     
-   /**
-    * Displays the main examples navigation
-    *
-    * @access   public
-    */
-    function displayNavigation()
+    /**
+     * Displays the main examples navigation
+     *
+     * @access   public
+     */
+    public function displayNavigation()
     {
         $this->displayHead('Nav');
     
@@ -688,12 +688,12 @@ class patExampleGen
         $this->displayFooter();
     }
     
-   /**
-    * Displays the examples overview page
-    *
-    * @access   public
-    */
-    function displayOverview()
+    /**
+     * Displays the examples overview page
+     *
+     * @access   public
+     */
+    public function displayOverview()
     {
         $this->displayHead('Overview');
 
@@ -752,13 +752,13 @@ class patExampleGen
         $this->displayFooter();
     }
     
-   /**
-    * Displays the header for any example page
-    *
-    * @access   public
-    * @param    string  $area   The area we are in - is added to the body style
-    */
-    function displayHead($area, $onload = null)
+    /**
+     * Displays the header for any example page
+     *
+     * @access   public
+     * @param    string  $area   The area we are in - is added to the body style
+     */
+    public function displayHead($area, $onload = null)
     {
         echo '<html>';
         echo '<head>';
@@ -775,25 +775,25 @@ class patExampleGen
         echo '<body class="'.$area.'" onload="'.$onload.'" marginheight="10" marginwidth="10" leftmargin="10" rightmargin="10" topmargin="10" bottommargin="10">';
     }
     
-   /**
-    * Displays the footer for any example page
-    *
-    * @access   public
-    */
-    function displayFooter()
+    /**
+     * Displays the footer for any example page
+     *
+     * @access   public
+     */
+    public function displayFooter()
     {
         echo '</body>';
         echo '</html>';
     }
 
-   /**
-    * get the example section
-    *
-    * @access   public
-    * @param    string      example id
-    * @return   string      section title
-    */
-    function getExampleSection($id)
+    /**
+     * get the example section
+     *
+     * @access   public
+     * @param    string      example id
+     * @return   string      section title
+     */
+    public function getExampleSection($id)
     {
         foreach ($this->sections as $title => $spec) {
             if (strncmp($spec['basename'], $id, strlen($spec['basename'])) === 0) {
@@ -804,14 +804,14 @@ class patExampleGen
         return false;
     }
 
-   /**
-    * Get an example's details
-    *
-    * @access   public
-    * @param    string      example id
-    * @return   string      section title
-    */
-    function getExample($id)
+    /**
+     * Get an example's details
+     *
+     * @access   public
+     * @param    string      example id
+     * @return   string      section title
+     */
+    public function getExample($id)
     {
         foreach ($this->sections as $title => $spec) {
             if (strncmp($spec['basename'], $id, strlen($spec['basename'])) !== 0) {
@@ -834,14 +834,14 @@ class patExampleGen
         return false;
     }
     
-   /**
-    * Get the tabs for an example (per example tabs can be modified/added).
-    *
-    * @access   public
-    * @param    string  $id     The example id
-    * @return   array   $tabs   The tabs for the specified example
-    */
-    function getTabs($id)
+    /**
+     * Get the tabs for an example (per example tabs can be modified/added).
+     *
+     * @access   public
+     * @param    string  $id     The example id
+     * @return   array   $tabs   The tabs for the specified example
+     */
+    public function getTabs($id)
     {
         foreach ($this->sections as $title => $spec) {
             if (strncmp($spec['basename'], $id, strlen($spec['basename'])) !== 0) {
@@ -873,15 +873,15 @@ class patExampleGen
         return false;
     }
     
-   /**
-    * Replacement for file_get_contents
-    *
-    * @access   public
-    * @static
-    * @param    string  filename
-    * @return   mixed   content of the file or false
-    */
-    function file_get_contents($filename)
+    /**
+     * Replacement for file_get_contents
+     *
+     * @access   public
+     * @static
+     * @param    string  filename
+     * @return   mixed   content of the file or false
+     */
+    public function file_get_contents($filename)
     {
         if (!file_exists($filename)) {
             return false;
@@ -903,15 +903,15 @@ class patExampleGen
         return $content;
     }
 
-   /**
-    * Simple url content loader
-    *
-    * @access   public
-    * @static
-    * @param    string  $url        The Url to get the content from
-    * @return   mixed   $content    The content of the file or false
-    */
-    function url_get_contents($url)
+    /**
+     * Simple url content loader
+     *
+     * @access   public
+     * @static
+     * @param    string  $url        The Url to get the content from
+     * @return   mixed   $content    The content of the file or false
+     */
+    public function url_get_contents($url)
     {
         if (function_exists("file_get_contents")) {
             return file_get_contents($url);
