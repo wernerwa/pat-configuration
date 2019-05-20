@@ -919,7 +919,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             $path   = '^'.str_replace('*', '.*', $path).'$';
             $values = array();
             foreach ($this->conf as $key => $value) {
-                if (eregi($path, $key)) {
+                if (preg_match("#$path#i", $key)) {
                     $values[$key]   =   $value;
                 }
             }

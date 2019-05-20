@@ -847,7 +847,7 @@ class patConfiguration
             $path       =   '^'.str_replace('*', '.*', $path).'$';
             $values     =   array();
             foreach ($this->conf as $key => $value) {
-                if (eregi($path, $key)) {
+                if (preg_match("#$path#i", $key)) {
                     $values[$key] = $value;
                 }
             }
@@ -920,10 +920,8 @@ class patConfiguration
         if (strstr($path, '*')) {
             $path       =   str_replace('.', '\.', $path);
             $path       =   '^'.str_replace('*', '.*', $path).'$';
-            $values     =   array();
-            reset($this->conf);
-            while (list($key, $value) = each($this->conf)) {
-                if (eregi($path, $key)) {
+            foreach ($this->conf as $key => $value) {
+                if (preg_match("#$path#i", $key)) {
                     unset($this->conf[$key]);
                 }
             }
