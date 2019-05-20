@@ -178,7 +178,8 @@ class patConfiguration
      * set the XML encoding
      *
      * @access   public
-     * @param    string  $encoding
+     * @param    string $encoding
+     * @return bool
      */
     public function setEncoding($encoding)
     {
@@ -190,7 +191,8 @@ class patConfiguration
      * set the directory, where all config files are stored
      *
      * @access   public
-     * @param    string  $configDir  name of the directory
+     * @param    string $configDir name of the directory
+     * @return bool|object
      */
     public function setConfigDir($configDir)
     {
@@ -297,9 +299,10 @@ class patConfiguration
      * - filetype
      *
      * @access   public
-     * @param    string  $file   name of config file
-     * @param    string  $mode   options for loading the config
+     * @param    string $file name of config file
+     * @param    string $mode options for loading the config
      * @see  loadCachedConfig(), parseConfigFile()
+     * @return bool|mixed|object|string
      */
     public function loadConfig($file, $options = array( 'mode' => 'w' ))
     {
@@ -360,10 +363,10 @@ class patConfiguration
      *
      * if cache is not valid, it will be updated automatically
      *
-     * @access   public
-     * @param    string  $file       name of config file
-     * @param    string  $mode       options for loading the config
-     * @return   mixed   $success    True on success, patError object otherwise.
+     * @access public
+     * @param  string        $file name of config file
+     * @param  string|array  $options
+     * @return mixed         $success    True on success, patError object otherwise.
      * @see  loadConfig()
      */
     public function loadCachedConfig($file, $options = array( 'mode' => 'w' ))
@@ -433,10 +436,11 @@ class patConfiguration
      * please use loadConfig instead
      *
      * @access   public
-     * @param    string  $file   name of the configuration file
-     * @param    string  $mode   options for loading the config
+     * @param    string $file name of the configuration file
+     * @param    string $mode options for loading the config
      * @see  loadConfig(), loadCachedConfig()
      * @deprecated   since v2.0
+     * @return bool|mixed|object|string
      */
     public function parseConfigFile($file, $options = array( 'mode' => 'w' ))
     {
@@ -447,8 +451,9 @@ class patConfiguration
      * get the full path of a file
      *
      * @access   public
-     * @param    string  $file       filename
-     * @param    string  $relative   get path relative to this file
+     * @param    string $file filename
+     * @param    string $relative get path relative to this file
+     * @return bool|object|string
      */
     public function getFullPath($file, $relative = null, $check = true)
     {
@@ -506,8 +511,9 @@ class patConfiguration
      * will load driver, if not already loaded
      *
      * @access   private
-     * @param    string  $filetype   type of file that should be read/written
-     * @param    string  $mode       mode of the driver (reader|writer)
+     * @param    string $filetype type of file that should be read/written
+     * @param    string $mode mode of the driver (reader|writer)
+     * @return mixed
      */
     public function &_getDriver($filetype, $mode = 'Reader')
     {
@@ -526,8 +532,9 @@ class patConfiguration
      * load a driver
      *
      * @access   private
-     * @param    string  $filetype   type of file that should be read/written
-     * @param    string  $mode       mode of the driver (reader|writer)
+     * @param    string $filetype type of file that should be read/written
+     * @param    string $mode mode of the driver (reader|writer)
+     * @return object
      */
     public function &_loadDriver($filetype, $mode = 'Reader')
     {
@@ -629,9 +636,10 @@ class patConfiguration
      * write cache
      *
      * @access   private
-     * @param    string  $file   filename
-     * @param    array   $config configuration
-     * @param    array   $externalFiles  list of files used
+     * @param    string $file filename
+     * @param    array $config configuration
+     * @param    array $externalFiles list of files used
+     * @return bool|object
      */
     public function writeCache($file, $config, $externalFiles)
     {
@@ -669,9 +677,10 @@ class patConfiguration
      *
      *
      * @access   public
-     * @param    string  $filename   name of the configfile
-     * @param    string  $format     format of the config file
-     * @param    array   $options    options, see the writer driver for details
+     * @param    string $filename name of the configfile
+     * @param    string $format format of the config file
+     * @param    array $options options, see the writer driver for details
+     * @return bool|object|string
      */
     public function writeConfigFile($filename, $options = null, $oldOptions = null)
     {
@@ -890,7 +899,8 @@ class patConfiguration
      * sets several config values
      *
      * @access   public
-     * @param    array   $values     assoc array containg paths and values
+     * @param    array $values assoc array containg paths and values
+     * @return bool|null
      */
     public function setConfigValues($values)
     {
@@ -908,7 +918,8 @@ class patConfiguration
      * if no path is given, the complete config will be cleared
      *
      * @access   public
-     * @param    string  $path   path, where the value is stored
+     * @param    string $path path, where the value is stored
+     * @return bool
      */
     public function clearConfigValue($path = '')
     {
