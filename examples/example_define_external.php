@@ -1,16 +1,16 @@
-<?PHP
+<?php
 /**
  * patConfiguration example
  *
  * $Id: example_define_external.php 29 2005-03-04 21:25:29Z schst $
- *	
- * @package		patConfiguration
- * @subpackage	Examples
- * @author		Stephan Schmidt <schst@php-tools.net>
+ *
+ * @package     patConfiguration
+ * @subpackage  Examples
+ * @author      Stephan Schmidt <schst@php-tools.net>
  */
 
 error_reporting(E_ALL);
- 
+
 /**
  * requires patErrorManager
  * make sure that it is in your include path
@@ -25,18 +25,17 @@ patErrorManager::setErrorHandling(E_ALL, 'verbose');
 require_once '../patConfiguration.php';
 
 // create config
-$conf = new	patConfiguration(
-                            array(
+$conf = new patConfiguration(
+    array(
                                 'configDir'  => './config',
-								'definesDir' => './defines'
+                                'definesDir' => './defines'
                                 )
-                            );
+);
 // parse config file
 $conf->loadConfig('example_define_external.xml');
 
-$config	= $conf->getConfigValue();
-	
+$config = $conf->getConfigValue();
+
 echo '<pre>';
 print_r($config);
 echo '</pre>';
-?>

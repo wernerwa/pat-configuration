@@ -1,12 +1,12 @@
-<?PHP
+<?php
 /**
  * patConfiguration example
  *
  * $Id: example_define_object.php 29 2005-03-04 21:25:29Z schst $
- *	
- * @package		patConfiguration
- * @subpackage	Examples
- * @author		Stephan Schmidt <schst@php-tools.net>
+ *
+ * @package     patConfiguration
+ * @subpackage  Examples
+ * @author      Stephan Schmidt <schst@php-tools.net>
  */
 
 error_reporting(E_ALL);
@@ -18,17 +18,17 @@ error_reporting(E_ALL);
  */
 class page
 {
-	function page( $props )
-	{
-		if (!is_array($props)) {
-			$props = array( 'id' => 'props' );
-		}
-		foreach ($props as $prop => $value) {
-			$this->$prop = $value;
-		}
-	}
+    public function page($props)
+    {
+        if (!is_array($props)) {
+            $props = array( 'id' => 'props' );
+        }
+        foreach ($props as $prop => $value) {
+            $this->$prop = $value;
+        }
+    }
 }
- 
+
 /**
  * requires patErrorManager
  * make sure that it is in your include path
@@ -43,17 +43,16 @@ patErrorManager::setErrorHandling(E_ALL, 'verbose');
 require_once '../patConfiguration.php';
 
 // create config
-$conf = new	patConfiguration(
-                            array(
+$conf = new patConfiguration(
+    array(
                                 'configDir' => './config'
                                 )
-                            );
+);
 // parse config file
-$conf->loadConfig( 'example_define_object.xml' );
+$conf->loadConfig('example_define_object.xml');
 
-$config	= $conf->getConfigValue();
-	
+$config = $conf->getConfigValue();
+
 echo '<pre>';
-print_r( $config );
+print_r($config);
 echo '</pre>';
-?>

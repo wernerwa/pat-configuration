@@ -8,9 +8,9 @@
  *
  * $Id: package.php 54 2006-02-03 08:01:11Z argh $
  *
- * @author		Stephan Schmidt <schst@php-tools.net>
- * @package		patConfiguration
- * @subpackage	Tools
+ * @author      Stephan Schmidt <schst@php-tools.net>
+ * @package     patConfiguration
+ * @subpackage  Tools
  */
 
 $version = '2.0.0';
@@ -88,7 +88,7 @@ $result = $package->setOptions(array(
     'baseinstalldir'    => 'pat',
     'packagedirectory'  => './',
     'dir_roles'         => array(
-								 'docs' => 'doc',
+                                 'docs' => 'doc',
                                  'examples' => 'doc',
                                  'tests' => 'test',
                                  )
@@ -114,4 +114,3 @@ if (PEAR::isError($result)) {
     echo $result->getMessage();
     die();
 }
-?>

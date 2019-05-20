@@ -9,34 +9,34 @@
  *
  * - example => id of the example
  *
- * @author		Stephan Schmidt
- * @package		patConfiguration
- * @subpackage	Examples
+ * @author      Stephan Schmidt
+ * @package     patConfiguration
+ * @subpackage  Examples
  */
 
-	if( !isset( $_GET['example'] ) )
-		die( 'No example selected.' );
-	
-	$exampleId = $_GET['example'];
+if (!isset($_GET['example'])) {
+    die('No example selected.');
+}
+    
+    $exampleId = $_GET['example'];
 
-	$extensions = array(
-	                       'xml', 'php', 'ini', 'wddx'
-	                   );
+    $extensions = array(
+                           'xml', 'php', 'ini', 'wddx'
+                       );
 
     $content = '';
     foreach ($extensions as $ext) {
         $file   = '../config/' . $exampleId . '.' . $ext;
         if (!file_exists($file) || !is_readable($file)) {
-        	continue;
+            continue;
         }
         $content = $content . "<h2>"  . strtoupper($ext)." Configuration</h2>";
         $content = $content . "<pre>" . htmlspecialchars(str_replace("\t", '    ', file_get_contents($file))) . "</pre>";
     }
     if (strlen($content) > 0) {
-    	echo $content;
-    	exit();
+        echo $content;
+        exit();
     }
-	
-	// nothing at all.
-	die( 'There is no configuration file for this example.' );
-?>
+    
+    // nothing at all.
+    die('There is no configuration file for this example.');
