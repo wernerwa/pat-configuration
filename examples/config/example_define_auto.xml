@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_define_auto.xml 29 2005-03-04 21:25:29Z schst $ -->
+<!DOCTYPE configuration SYSTEM "patConfiguration.dtd">
+<configuration>
+    <!-- 
+        Setting the type will allow patConfiguration
+        to guess the type of the value. It will use one of
+        the following types:
+        - boolean
+        - integer
+        - double
+        - array
+        - string
+    -->
+    <define tag="param" type="auto" name="_attribute" attribute="name"/>
+    
+    <param name="bool1">true</param>
+    <param name="bool2">false</param>
+
+    <param name="int1">342</param>
+    <param name="int2">+74832</param>
+    <param name="int3">-2</param>
+
+    <param name="float1">4.5634</param>
+    <param name="float2">+7.4832</param>
+    <param name="float3">-2.4728</param>
+    <param name="float4">.4728</param>
+    <param name="float5">-0.4728</param>
+
+    <param name="array">
+        <param name="int1">342</param>
+        <param name="string">This is a string</param>
+        <param name="bool1">true</param>
+    </param>
+
+    <param name="string">This is a string</param>
+    
+</configuration>

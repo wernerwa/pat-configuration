@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_define_external.xml 29 2005-03-04 21:25:29Z schst $ -->
+<configuration>
+
+	<xinc href="heroes.xml" once="yes" parse="xml" relativeTo="defines"/>
+	
+	<heroes>
+		<hero name="Superman" realname="Clark Kent"/>
+		<hero name="Batman" realname="Bruce Wayne"/>
+	</heroes>
+	
+</configuration>

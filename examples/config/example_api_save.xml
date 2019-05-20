@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_api_save.xml 29 2005-03-04 21:25:29Z schst $ -->
+<!DOCTYPE configuration [
+]>
+<configuration>
+	<!-- Standard way, to define config values -->
+	<path name="forum">
+		<configValue name="includedir" type="string">
+			/forum/include/argh
+		</configValue>
+		<configValue name="active" type="bool">false</configValue>
+		<configValue name="online" type="bool">on</configValue>
+		<configValue name="convert" type="double">16.45673</configValue>
+		<configValue name="rep" type="integer">56730</configValue>
+
+		<configValue name="pat_include" type="string">
+			<getConfigValue path="forum.includedir"/>/pat
+		</configValue>
+	</path>	
+</configuration>

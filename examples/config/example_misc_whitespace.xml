@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_misc_whitespace.xml 29 2005-03-04 21:25:29Z schst $ -->
+<!DOCTYPE configuration [
+]>
+<configuration>
+	<configValue name="default" xml:space="default" type="string">
+		This is a small text
+		with xml:space=&quot;default&quot;.
+		Basically there's just trim() used.
+	</configValue>
+	<configValue name="preserve" xml:space="preserve" type="string">
+		This is a small text
+		with xml:space=&quot;preserve&quot;.
+		All whitespace characters are preserved.
+	</configValue>
+	<configValue name="strip" xml:space="strip" type="string">
+		This is a small text
+		with xml:space=&quot;strip&quot;.
+		Unneeded whitespace is stripped.
+	</configValue>
+</configuration>

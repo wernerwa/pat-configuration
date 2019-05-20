@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_define_constants.xml 29 2005-03-04 21:25:29Z schst $ -->
+<configuration>
+	<!-- define a tag without namespace -->
+	<define tag="error" type="integer" useconstants="true"/>
+
+	<error>FOO</error>
+
+</configuration>

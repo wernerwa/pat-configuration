@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_misc_xinc.xml 29 2005-03-04 21:25:29Z schst $ -->
+<configuration>
+	<path name="foo">
+		<configValue name="bar" type="array">
+			<configValue name="array1" type="array">
+				<configValue>myValue</configValue>
+				<configValue>another Value</configValue>
+			</configValue>
+		</configValue>
+	</path>
+	<xinc href="example_api_basic.xml" />
+</configuration>

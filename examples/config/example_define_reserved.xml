@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_define_reserved.xml 29 2005-03-04 21:25:29Z schst $ -->
+<configuration>
+	<!--
+        Redefining resered tags
+	-->
+	<define namespace="foo">
+		<define tag="define" type="string"/>
+	</define>
+	
+	<foo:define>bar</foo:define>
+
+    <define tag="define" type="string"/>
+	
+</configuration>

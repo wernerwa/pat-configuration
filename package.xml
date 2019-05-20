@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE package SYSTEM "http://pear.php.net/dtd/package-1.0">
+<package version="1.0" packagerversion="1.4.0a12">
+ <name>patConfiguration</name>
+ <summary>Interface for configuration files.</summary>
+ <description>patConfiguration is an interface to read and write different types of configuration files.
+Formats include:
+- read/write XML files
+- read/write INI files
+- read/write WDDX files
+- write PHP files.
+To improve performance, patConfiguration is able to use a caching system instead of parsing the files everytime they are needed.
+
+It is best known for its support for XML based configurations, as you may define your own tags
+and specify which PHP type they represent. Features include:
+- create any PHP type (from boolean to objects)
+- infinite nesting level
+- define namespaces, tags and attributes
+- choose how whitespace is handled
+- xInclude
+- use PHP constants in you configuration files
+ </description>
+ <maintainers>
+  <maintainer>
+   <user>schst</user>
+   <name>Stephan Schmidt</name>
+   <email>schst@php-tools.net</email>
+   <role>lead</role>
+  </maintainer>
+  </maintainers>
+ <release>
+  <version>2.0.0</version>
+  <date>2005-08-13</date>
+  <license>PHP</license>
+  <state>stable</state>
+  <notes>patConfiguration has been refactored with version 2.0 is not fully downwards compatible.
+Changes include:
+- driver based architecture
+- uses patError
+- support for INI and WDDX has been added
+- huge improvements for the define tag
+- no more namespace handlers by supplying extensions
+- license has been changed to PHP License
+
+Changes since patConfiguration 2.0.0b1:
+- fixed bug #104 (wrong parameter name) (schst)
+- added an error check in the writeConfigFile() method in case the target file cannot be written (argh)
+- fixed check for the writer's serializeConfig() method return values (argh)
+- added new &lt;define child=&quot;...&quot; default=&quot;...&quot; type=&quot;...&quot;/&gt; to define default values of non-existent child-tags
+
+Changes since patConfiguration 2.0.0b2:
+- added missing examples
+- prevent PHP-Notices with issetConfigValue() (bug #145, contributed by Frank Kleine)
+  </notes>
+  <deps>
+   <dep type="pkg" rel="has" optional="no">patError</dep>
+   <dep type="php" rel="ge" version="4.3.0" optional="no"/>
+  </deps>
+  <filelist>
+   <dir name="/" baseinstalldir="pat">
+    <dir name="docs">
+     <file role="doc" name="planned-features.txt"/>
+     <file role="doc" name="readme.txt"/>
+    </dir> <!-- /docs -->
+    <dir name="examples">
+     <dir name="cache">
+      <file role="doc" name="readme.txt"/>
+     </dir> <!-- /examples/cache -->
+     <dir name="config">
+      <file role="doc" name="example_api_array.xml"/>
+      <file role="doc" name="example_api_basic.xml"/>
+      <file role="doc" name="example_api_cache.xml"/>
+      <file role="doc" name="example_api_cache_option.xml"/>
+      <file role="doc" name="example_api_save.xml"/>
+      <file role="doc" name="example_define_auto.xml"/>
+      <file role="doc" name="example_define_basic.xml"/>
+      <file role="doc" name="example_define_children.xml"/>
+      <file role="doc" name="example_define_constants.xml"/>
+      <file role="doc" name="example_define_content.xml"/>
+      <file role="doc" name="example_define_external.xml"/>
+      <file role="doc" name="example_define_object.xml"/>
+      <file role="doc" name="example_define_reserved.xml"/>
+      <file role="doc" name="example_misc_whitespace.xml"/>
+      <file role="doc" name="example_misc_xinc.xml"/>
+     </dir> <!-- /examples/config -->
+     <dir name="defines">
+      <file role="doc" name="heroes.xml"/>
+     </dir> <!-- /examples/defines -->
+     <dir name="patExampleGen">
+      <file role="doc" name="fileUsage.php"/>
+      <file role="doc" name="patConfigurationSource.php"/>
+      <file role="doc" name="patExampleGen.php"/>
+      <file role="doc" name="styles.css"/>
+     </dir> <!-- /examples/patExampleGen -->
+     <file role="doc" name="example_api_array.php"/>
+     <file role="doc" name="example_api_basic.php"/>
+     <file role="doc" name="example_api_cache.php"/>
+     <file role="doc" name="example_api_cache_option.php"/>
+     <file role="doc" name="example_api_create.php"/>
+     <file role="doc" name="example_api_errors.php"/>
+     <file role="doc" name="example_api_objects.php"/>
+     <file role="doc" name="example_api_save.php"/>
+     <file role="doc" name="example_define_auto.php"/>
+     <file role="doc" name="example_define_basic.php"/>
+     <file role="doc" name="example_define_children.php"/>
+     <file role="doc" name="example_define_constants.php"/>
+     <file role="doc" name="example_define_content.php"/>
+     <file role="doc" name="example_define_external.php"/>
+     <file role="doc" name="example_define_object.php"/>
+     <file role="doc" name="example_define_reserved.php"/>
+     <file role="doc" name="example_formats_ini.php"/>
+     <file role="doc" name="example_formats_php.php"/>
+     <file role="doc" name="example_formats_wddx.php"/>
+     <file role="doc" name="example_formats_xml.php"/>
+     <file role="doc" name="example_misc_whitespace.php"/>
+     <file role="doc" name="example_misc_xinc.php"/>
+     <file role="doc" name="index.php"/>
+     <file role="doc" name="_examples_config.php"/>
+     <file role="doc" name="_examples_customFunctions.php"/>
+     <file role="doc" name="_examples_prepend.php"/>
+     <file role="doc" name="_examples_sections.php"/>
+     <file role="doc" name="_examples_sections_api.php"/>
+     <file role="doc" name="_examples_sections_define.php"/>
+     <file role="doc" name="_examples_sections_formats.php"/>
+     <file role="doc" name="_examples_sections_misc.php"/>
+    </dir> <!-- /examples -->
+    <dir name="patConfiguration">
+     <dir name="Reader">
+      <file role="php" name="INI.php"/>
+      <file role="php" name="WDDX.php"/>
+      <file role="php" name="XML.php"/>
+     </dir> <!-- /patConfiguration/Reader -->
+     <dir name="Writer">
+      <file role="php" name="INI.php"/>
+      <file role="php" name="PHP.php"/>
+      <file role="php" name="WDDX.php"/>
+      <file role="php" name="XML.php"/>
+     </dir> <!-- /patConfiguration/Writer -->
+     <file role="php" name="Reader.php"/>
+     <file role="php" name="Writer.php"/>
+    </dir> <!-- /patConfiguration -->
+    <file role="php" name="patConfiguration.php"/>
+   </dir> <!-- / -->
+  </filelist>
+ </release>
+ <changelog>
+   <release>
+    <version>2.0.0b1</version>
+    <date>2005-03-06</date>
+    <license>PHP</license>
+    <state>beta</state>
+    <notes>patConfiguration has been refactored with version 2.0 is not fully downwards compatible.
+Changes include:
+- driver based architecture
+- uses patError
+- support for INI and WDDX has been added
+- huge improvements for the define tag
+- no more namespace handlers by supplying extensions
+- license has been changed to PHP License
+    </notes>
+   </release>
+   <release>
+    <version>2.0.0b2</version>
+    <date>2005-04-05</date>
+    <license>PHP</license>
+    <state>beta</state>
+    <notes>patConfiguration has been refactored with version 2.0 is not fully downwards compatible.
+Changes include:
+- driver based architecture
+- uses patError
+- support for INI and WDDX has been added
+- huge improvements for the define tag
+- no more namespace handlers by supplying extensions
+- license has been changed to PHP License
+
+Changes since patConfiguration 2.0.0b1:
+- fixed bug #104 (wrong parameter name) (schst)
+- added an error check in the writeConfigFile() method in case the target file cannot be written (argh)
+- fixed check for the writer's serializeConfig() method return values (argh)
+- added new &lt;define child=&quot;...&quot; default=&quot;...&quot; type=&quot;...&quot;/&gt; to define default values of non-existent child-tags
+    </notes>
+   </release>
+   <release>
+    <version>2.0.0</version>
+    <date>2005-08-13</date>
+    <license>PHP</license>
+    <state>stable</state>
+    <notes>patConfiguration has been refactored with version 2.0 is not fully downwards compatible.
+Changes include:
+- driver based architecture
+- uses patError
+- support for INI and WDDX has been added
+- huge improvements for the define tag
+- no more namespace handlers by supplying extensions
+- license has been changed to PHP License
+
+Changes since patConfiguration 2.0.0b1:
+- fixed bug #104 (wrong parameter name) (schst)
+- added an error check in the writeConfigFile() method in case the target file cannot be written (argh)
+- fixed check for the writer's serializeConfig() method return values (argh)
+- added new &lt;define child=&quot;...&quot; default=&quot;...&quot; type=&quot;...&quot;/&gt; to define default values of non-existent child-tags
+
+Changes since patConfiguration 2.0.0b2:
+- added missing examples
+- prevent PHP-Notices with issetConfigValue() (bug #145, contributed by Frank Kleine)
+    </notes>
+   </release>
+ </changelog>
+</package>

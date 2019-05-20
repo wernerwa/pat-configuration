@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes"?>
+<!-- $Id: example_define_basic.xml 29 2005-03-04 21:25:29Z schst $ -->
+<configuration>
+	<!-- define a tag without namespace -->
+	<define tag="foo" type="string"/>
+
+	<!-- define a tag with variable name -->
+	<define type="string" tag="bar" name="_attribute" attribute="id" />
+	
+	<!-- define a new namespace -->
+	<define ns="shop">
+		<!-- define a tag in the namespace -->
+		<define tag="articles" type="array"/>
+	
+		<!-- Define a tag with no name (indexed array) -->
+		<define tag="article" name="_none" type="array">
+			<!-- define three attributes for this tag -->
+ 			<define attribute="vendor" type="string"/>
+			<define attribute="title" type="string"/>
+			<define attribute="price" type="float" default="99.99"/>
+		</define>
+	</define>
+
+	<foo>This is just a string</foo>
+	<bar id="myBar">Another string, by using the 'bar' tag.</bar>
+	<bar id="fooBar">And another string, by using the 'bar' tag.</bar>
+
+	<shop:articles>
+		<shop:article title="Power battery" vendor="Green Lantern"/>
+		<shop:article title="Batarang" vendor="Batman" price="500"/>
+	</shop:articles>
+
+	<!--
+		Using the value attribute
+	-->
+	
+	<define tag="heroes" type="array"/>
+	<define tag="hero" type="string" name="_attribute" attribute="name" value="realname"/>
+	
+	<heroes>
+		<hero name="Superman" realname="Clark Kent"/>
+		<hero name="Batman" realname="Bruce Wayne"/>
+	</heroes>
+	
+
+	<!--
+		Using the content attribute
+	-->
+	
+	<define tag="page" type="array" content="items">
+		<define attribute="id" type="string"/>
+	</define>
+	<define tag="item" type="string" name="_none"/>
+	
+	<page id="foo">
+		<item>one</item>
+		<item>two</item>
+		<item>three</item>
+	</page>
+
+</configuration>
