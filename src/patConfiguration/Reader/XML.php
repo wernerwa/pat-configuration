@@ -926,7 +926,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             return  $values;
         }
 
-        //  check wether a value of an array was requested
+        //  check whether a value of an array was requested
         if ($index = strrchr($path, '[')) {
             $path  = substr($path, 0, strrpos($path, '['));
             $index = substr($index, 1, (strlen($index) - 2));
