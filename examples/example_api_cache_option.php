@@ -24,7 +24,7 @@ patErrorManager::setErrorHandling(E_ALL, 'verbose');
  */
 require_once '../patConfiguration.php';
 
-$conf = &new patConfiguration();
+$conf = new patConfiguration();
 $conf->setConfigDir('./config');
 $conf->setCacheDir('./cache');
 

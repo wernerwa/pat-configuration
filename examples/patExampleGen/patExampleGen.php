@@ -570,7 +570,7 @@ class patExampleGen
         
         if (class_exists('XML_Beautifier')) {
             if (!is_object($this->beautifier)) {
-                $this->beautifier =& new XML_Beautifier();
+                $this->beautifier = new XML_Beautifier();
             }
             
             $result =   $this->beautifier->formatString($xml);

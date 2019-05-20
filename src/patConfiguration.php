@@ -560,7 +560,7 @@ class patConfiguration
         }
 
         //  create Writer object
-        $driver = &new $driverClass;
+        $driver = new $driverClass;
 
         if (method_exists($driver, 'setConfigReference')) {
             $driver->setConfigReference($this);
@@ -800,7 +800,7 @@ class patConfiguration
                 } else {
                     $class = 'stdClass';
                 }
-                $value = &new $class($value);
+                $value = new $class($value);
                 break;
 
             //  automatic conversion

@@ -25,7 +25,7 @@ require_once '../patConfiguration.php';
 patErrorManager::setErrorHandling(E_ALL, 'ignore');
 
 // create config
-$conf = &new    patConfiguration(array(
+$conf = new    patConfiguration(array(
                                             'configDir'     =>  './config',
                                             'errorHandling' =>  'return'
                                         ));

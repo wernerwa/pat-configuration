@@ -25,7 +25,7 @@ patErrorManager::setErrorHandling(E_ALL, 'verbose');
 require_once '../patConfiguration.php';
 
 // create config
-$conf = &new patConfiguration(
+$conf = new patConfiguration(
     array(
                                     'encoding' => 'ISO-8859-1',
                                    )

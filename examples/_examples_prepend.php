@@ -34,7 +34,7 @@
     include_once '_examples_customFunctions.php';
 
     // set up the examples generator with the section data
-    $exampleGen =& new patExampleGen;
+    $exampleGen = new patExampleGen;
     $exampleGen->setAppName($appName);
     $exampleGen->setAppDescription($appDesc);
     $exampleGen->setAppForumId($appForumId);
