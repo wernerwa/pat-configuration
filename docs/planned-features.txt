@@ -1,3 +1,0 @@
-Planned features:
------------------
-$Id: planned-features.txt 37 2005-03-06 10:11:26Z schst $
