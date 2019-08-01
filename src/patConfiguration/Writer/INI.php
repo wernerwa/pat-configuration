@@ -4,8 +4,6 @@
  *
  * used by the patConfiguration object to write INI config files
  *
- * $Id: INI.php 22 2005-02-05 15:50:56Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Writer
  * @author      Stephan Schmidt <schst@php-tools.net>
@@ -15,8 +13,6 @@
  * patConfiguration writer for INI files
  *
  * used by the patConfiguration object to write INI config files
- *
- * $Id: INI.php 22 2005-02-05 15:50:56Z schst $
  *
  * @package     patConfiguration
  * @subpackage  Writer

@@ -2,8 +2,6 @@
 /**
  * Definitions for the examples of the different formats
  *
- * $Id: _examples_sections_formats.php 34 2005-03-05 16:55:02Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

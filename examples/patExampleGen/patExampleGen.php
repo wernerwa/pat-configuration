@@ -3,20 +3,16 @@
  * The pat examples framework class - manages the navigation and
  * functionality of the examples collection of our tools.
  *
- * $Id: patExampleGen.php 29 2005-03-04 21:25:29Z schst $
- *
  * @package     patExampleGen
  * @author      Sebastian Mordziol <argh@php-tools.net>
  */
 
  // global flag needed for the error handling output
  $GLOBALS['errorStylesRendered'] = false;
- 
+
 /**
  * The pat examples framework class - manages the navigation and
  * functionality of the examples collection of our tools.
- *
- * $Id: patExampleGen.php 29 2005-03-04 21:25:29Z schst $
  *
  * @package     patExampleGen
  * @version     0.9
@@ -34,7 +30,7 @@ class patExampleGen
      * @see      setSections()
      */
     public $vars = array();
-    
+
     /**
      * Stores the sections collection to generate
      * the examples navigation from
@@ -43,7 +39,7 @@ class patExampleGen
      * @var      array
      */
     public $sections = array();
-    
+
     /**
      * The XML_Beautifier class - used if installed to display
      * XML output in a nice readable format with indentation.
@@ -52,7 +48,7 @@ class patExampleGen
      * @var      object
      */
     public $beautifier = false;
-    
+
     /**
      * Stores the tabs configuration used to create the tabnavigation
      * for each example.
@@ -62,7 +58,7 @@ class patExampleGen
      * @see      setTabs()
      */
     public $tabs = array();
-    
+
     /**
      * Stores the name of the application
      *
@@ -71,7 +67,7 @@ class patExampleGen
      * @see      setAppName()
      */
     public $appName = 'Unknown';
-    
+
     /**
      * Stores the description of the application
      *
@@ -89,7 +85,7 @@ class patExampleGen
      * @see      setAppForumId()
      */
     public $appForumId = 0;
-    
+
     /**
      * Main process method that dispatches needed tasks according
      * to the given action.
@@ -99,31 +95,31 @@ class patExampleGen
     public function process()
     {
         $this->vars = $this->getRequestVars();
-    
+
         $action = 'frameset';
         if (isset($this->vars['action'])) {
             $action = strtolower($this->vars['action']);
         }
-        
+
         switch ($action) {
             case 'frameset':
                 $this->displayFrameset();
                 break;
-                
+
             case 'navigation':
                 $this->displayNavigation();
                 break;
-                
+
             case 'overview':
                 $this->displayOverview();
                 break;
-                
+
             case 'example':
                 $this->displayExample();
                 break;
         }
     }
-    
+
     /**
      * Retrieves the request variables from POST and GET
      *
@@ -134,7 +130,7 @@ class patExampleGen
     {
         return array_merge($_POST, $_GET);
     }
-    
+
     /**
      * Sets the default tab configuration that will be used for
      * each example page. Additional tabs can be defined for each
@@ -148,7 +144,7 @@ class patExampleGen
     {
         $this->tabs = $tabs;
     }
-    
+
     /**
      * Sets the name of the application
      *
@@ -160,7 +156,7 @@ class patExampleGen
     {
         $this->appName = $appName;
     }
-    
+
     /**
      * Sets the description of the application
      *
@@ -172,7 +168,7 @@ class patExampleGen
     {
         $this->appDescription = $desc;
     }
-    
+
     /**
      * Sets the ID of the application's forum. Needed to display
      * the correct link to the forum.
@@ -185,7 +181,7 @@ class patExampleGen
     {
         $this->appForumId = $id;
     }
-    
+
     /**
      * Retrieves the default example view tab, the one
      * that is active when the page is loaded.
@@ -200,12 +196,12 @@ class patExampleGen
                 return $tabId;
             }
         }
-        
+
         reset($tabs);
-        
+
         return key($tabs);
     }
-    
+
     /**
      * Custom error handler that is set automatically to display
      * any patError error objets within the examples collection.
@@ -227,7 +223,7 @@ class patExampleGen
     public function &displayError(&$error)
     {
         $prefix = 'arghDebug';
-        
+
         // display the needed styles and scripts, but only once.
         if (!$GLOBALS['errorStylesRendered']) {
             echo '<style>';
@@ -263,12 +259,12 @@ class patExampleGen
             echo '	document.getElementById( "'.$prefix.'" + eid + "backtrace" ).style.display = "block";';
             echo '}';
             echo '</script>';
-            
+
             $GLOBALS['errorStylesRendered'] = true;
         }
 
         $errorID = md5($error->getFile().$error->getLine());
-        
+
         echo    '<div class="'.$prefix.'Frame">';
         printf(
             '<div style="margin-bottom:8px;"><span class="'.$prefix.'Type">%s:</span> %s in %s on line %s</div>Details: %s (<a href="javascript:'.$prefix.'displayBacktrace( \''.$errorID.'\' );">show backtrace</a>)',
@@ -310,13 +306,13 @@ class patExampleGen
             echo    '</table>';
         }
         echo    '</div>';
-        
+
         $level  =   $error->getLevel();
-        
+
         if ($level != E_ERROR) {
             return  $error;
         }
-            
+
         exit();
     }
 
@@ -330,16 +326,16 @@ class patExampleGen
         if (!isset($this->vars['example'])) {
             die('No example selected.');
         }
-        
+
         $exampleId      =   $this->vars['example'];
         $section        =   $this->getExampleSection($exampleId);
         $example        =   $this->getExample($exampleId);
         $exampleFile    =   $exampleId.'.php';
         $tabs           =   $this->getTabs($exampleId);
         $defaultTab     =   $this->getDefaultTab($tabs);
-        
+
         $this->displayHead('Example', 'displayTab( \''.$defaultTab.'\' );');
-        
+
         echo '<script type="text/javascript" language="JavaScript1.2">';
         echo 'var tabs = new Array( \''.implode("', '", array_keys($tabs)).'\' );';
         echo 'var actTab = false;';
@@ -385,7 +381,7 @@ class patExampleGen
         echo '		<td width="100%">&nbsp;</td>';
         echo '	</tr>';
         echo '</table>';
-        
+
         // the tab contents
         foreach ($tabs as $tabId => $tabDef) {
             // replace variables in the file string with
@@ -396,31 +392,31 @@ class patExampleGen
                     '$exampleFile',
                     '$exampleId',
                 );
-                
+
                 // store values
                 $replace = array();
                 foreach ($needles as $n) {
                     array_push($replace, ${substr($n, 1)});
                 }
-                
+
                 // replace
                 $tabDef['file'] = str_replace($needles, $replace, $tabDef['file']);
             }
-        
+
             // what kind of tab is this?
             switch (strtolower($tabDef['type'])) {
                 case 'phpsource':
                     $this->displayPHPSource($tabId, $tabDef['file']);
                     break;
-                    
+
                 case 'output':
                     $this->displayOutput($tabId, $tabDef['file']);
                     break;
-                    
+
                 case 'xmlsource':
                     $this->displayXMLSource($tabId, $tabDef['file']);
                     break;
-                
+
                 case 'text':
                     $this->displayText($tabId, $tabDef['text']);
                     break;
@@ -430,10 +426,10 @@ class patExampleGen
                     break;
             }
         }
-        
+
         $this->displayFooter();
     }
-    
+
     /**
      * Display an example's output in an example tab via an iframe
      *
@@ -445,7 +441,7 @@ class patExampleGen
     {
         echo '<iframe class="exampleContent" style="display:none;" id="'.$tabId.'" src="'.$file.'"></iframe>';
     }
-    
+
     public function displayGuide($tabId, $file, $guide)
     {
         $file = explode("\n", $this->file_get_contents($file));
@@ -473,15 +469,15 @@ class patExampleGen
             highlight_string('<?php'.$hilight.'?>');
             $content = ob_get_contents();
             ob_end_clean();
-            
+
             $content = str_replace('&lt;?php', '', $content);
             $content = str_replace('?&gt;', '', $content);
-            
+
             $numbers = '';
             for ($i=$slice[0]; $i <= $slice[1]; $i++) {
                 $numbers .= $i.'.<br>';
             }
-            
+
             echo '	<div class="guideEntryTitle">'.$entry['text'].'</div>
 					<div class="guideEntry">
 						<table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -509,7 +505,7 @@ class patExampleGen
         highlight_file($file);
         echo '</div>';
     }
-    
+
     /**
      * Display a free text in a tab
      *
@@ -534,17 +530,17 @@ class patExampleGen
     public function displayXMLSource($tabId, $file)
     {
         $url = str_replace('index.php', $file, 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']);
-    
+
         $source = $this->url_get_contents($url);
         if (!$source) {
             die('Could not open XML source file for hilighting: "'.$url.'"');
         }
-    
+
         echo '<div class="exampleContent" id="'.$tabId.'">';
         $this->displayXMLString($source);
         echo '</div>';
     }
-    
+
     /**
      * Hilights an xml string and displays it
      *
@@ -556,7 +552,7 @@ class patExampleGen
     {
         echo $this->highlightXML($xml);
     }
-    
+
     /**
      * Highlights an xml string and returns the highlighted source
      *
@@ -567,23 +563,23 @@ class patExampleGen
     public function highlightXML($xml)
     {
         @include_once('XML/Beautifier.php');
-        
+
         if (class_exists('XML_Beautifier')) {
             if (!is_object($this->beautifier)) {
                 $this->beautifier = new XML_Beautifier();
             }
-            
+
             $result =   $this->beautifier->formatString($xml);
             if (!PEAR::isError($result)) {
                 $xml = $result;
             }
         }
-        
+
         ob_start();
         highlight_string($xml);
         $xml = ob_get_contents();
         ob_end_clean();
-        
+
         return $xml;
     }
 
@@ -615,7 +611,7 @@ class patExampleGen
     {
         $this->sections = $sections;
     }
-    
+
     /**
      * Displays the main examples navigation
      *
@@ -624,7 +620,7 @@ class patExampleGen
     public function displayNavigation()
     {
         $this->displayHead('Nav');
-    
+
         echo '<script language="JavaScript1.2" type="text/javascript">';
         echo '	var sections = new Array();';
         echo '	function addSection( section )';
@@ -653,24 +649,24 @@ class patExampleGen
         foreach ($this->sections as $sectionName => $section) {
             echo '<h3 onclick="toggleSection( \''.$sectionName.'\' );"><span id="'.$sectionName.'-sign" class="sign">[+]</span> '.$this->appName.'::'.$sectionName.' ('.count($section['pages']).')</h3>';
             echo '<div id="'.$sectionName.'" class="section"><script language="JavaScript1.2" type="text/javascript">addSection( \''.$sectionName.'\' );</script>';
-            
+
             foreach ($section['pages'] as $pageId => $pageData) {
                 $exampleFile = $section['basename'].$pageId;
                 if (isset($pageData['alias'])) {
                     $exampleFile = $pageData['alias'];
                 }
-            
+
                 if (!file_exists($exampleFile.'.php')) {
                     echo '&raquo; '.$pageData['title'].'<br>';
                     continue;
                 }
-                
+
                 echo '<a href="index.php?action=example&example='.$exampleFile.'" target="display" title="'.$pageData['descr'].'" class="nav">&raquo; '.$pageData['title'].'</a><br/>';
             }
-            
+
             echo '</div>';
         }
-        
+
         echo '<div id="navFooter">';
         echo '	If you need help with '.$this->appName.', want to comment on it or ';
         echo '	need any additional info, please visit the following resources:';
@@ -684,10 +680,10 @@ class patExampleGen
         echo '	<a href="http://cvs.php-tools.net/horde/chora/cvs.php/'.$this->appName.'" class="nav" target="_blank">&raquo; CVS Tree</a><br/>';
         echo '	<a href="http://snaps.php-tools.net" class="nav" target="_blank">&raquo; CVS Snapshots</a>';
         echo '</div>';
-        
+
         $this->displayFooter();
     }
-    
+
     /**
      * Displays the examples overview page
      *
@@ -703,11 +699,11 @@ class patExampleGen
         echo '	This overview lists all examples with a small description, and to ';
         echo '	navigate the examples, use the navigation on the left.';
         echo '</h3>';
-        
+
         if (!empty($this->appDescription)) {
             echo '<h5>'.$this->appDescription.'</h5>';
         }
-        
+
         echo '<ul>';
 
         foreach ($this->sections as $section => $sectionData) {
@@ -715,10 +711,10 @@ class patExampleGen
             if (isset($sectionData['state'])) {
                 $state = '('.$sectionData['state'].')';
             }
-            
+
             echo '&raquo; <a href="#'.$section.'">'.$this->appName.'::'.$section.'</a> '.$state.'<br>';
         }
-        
+
         echo '</ul><br/>';
 
         foreach ($this->sections as $section => $sectionData) {
@@ -730,14 +726,14 @@ class patExampleGen
                 if (isset($pageData['alias'])) {
                     $exampleFile = $pageData['alias'];
                 }
-    
+
                 $state = '';
                 if (isset($pageData['state'])) {
                     $state = '('.$pageData['state'].')';
                 }
-        
+
                 echo '<li>';
-            
+
                 if (!file_exists($exampleFile.'.php')) {
                     echo $pageData['title'].' '.$state.'<br />';
                 } else {
@@ -748,10 +744,10 @@ class patExampleGen
             }
             echo '</ul><br />';
         }
-        
+
         $this->displayFooter();
     }
-    
+
     /**
      * Displays the header for any example page
      *
@@ -765,16 +761,16 @@ class patExampleGen
         echo '	<title>'.$this->appName.' Examples</title>';
         echo '	<style>';
         echo '		@import url( patExampleGen/styles.css );';
-        
+
         if (file_exists('../custom.css') || file_exists('custom.css')) {
             echo '		@import url( custom.css );';
         }
-        
+
         echo '	</style>';
         echo '</head>';
         echo '<body class="'.$area.'" onload="'.$onload.'" marginheight="10" marginwidth="10" leftmargin="10" rightmargin="10" topmargin="10" bottommargin="10">';
     }
-    
+
     /**
      * Displays the footer for any example page
      *
@@ -800,7 +796,7 @@ class patExampleGen
                 return $title;
             }
         }
-        
+
         return false;
     }
 
@@ -817,23 +813,23 @@ class patExampleGen
             if (strncmp($spec['basename'], $id, strlen($spec['basename'])) !== 0) {
                 continue;
             }
-                
+
             foreach ($spec['pages'] as $name => $data) {
                 if ($id != $spec['basename'].$name) {
                     continue;
                 }
-                    
+
                 if (!isset($data['templates'])) {
                     $data['templates'] = array( $id.'.tmpl' );
                 }
-            
+
                 return $data;
             }
         }
 
         return false;
     }
-    
+
     /**
      * Get the tabs for an example (per example tabs can be modified/added).
      *
@@ -847,32 +843,32 @@ class patExampleGen
             if (strncmp($spec['basename'], $id, strlen($spec['basename'])) !== 0) {
                 continue;
             }
-                
+
             foreach ($spec['pages'] as $name => $data) {
                 if ($id != $spec['basename'].$name) {
                     continue;
                 }
-                
+
                 if (!isset($data['tabs'])) {
                     return $this->tabs;
                 }
-            
+
                 $tabs = $this->tabs;
                 foreach ($data['tabs'] as $tabId => $tabDef) {
                     if (!isset($tabDef['default'])) {
                         $tabDef['default'] = false;
                     }
-                
+
                     $tabs[$tabId] = $tabDef;
                 }
-                
+
                 return $tabs;
             }
         }
 
         return false;
     }
-    
+
     /**
      * Replacement for file_get_contents
      *
@@ -886,7 +882,7 @@ class patExampleGen
         if (!file_exists($filename)) {
             return false;
         }
-    
+
         if (function_exists("file_get_contents")) {
             return file_get_contents($filename);
         }
@@ -895,7 +891,7 @@ class patExampleGen
         if (!$fp) {
             return false;
         }
-        
+
         flock($fp, LOCK_SH);
         $content    =   fread($fp, filesize($filename));
         flock($fp, LOCK_UN);
@@ -921,13 +917,13 @@ class patExampleGen
         if (!$fp) {
             return false;
         }
-        
+
         $content = '';
         while (!feof($fp)) {
             $content    .=  fread($fp, 2000);
         }
         fclose($fp);
-        
+
         return $content;
     }
 }

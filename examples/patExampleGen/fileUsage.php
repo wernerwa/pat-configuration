@@ -4,8 +4,6 @@
  * example files that may be missing or are not referenced to in the
  * examples section definitions.
  *
- * $Id: fileUsage.php 29 2005-03-04 21:25:29Z schst $
- *
  * @access      public
  * @package     patExampleGen
  * @subpackage  Examples
@@ -13,28 +11,28 @@
  * @author      Sebastian Mordziol <s.mordziol@metrix.de>
  * @link        http://www.php-tools.net
  */
- 
+
    /**
     * Main prepend file
     */
     require_once 'prepend.php';
- 
+
     $knownExamples = array();
     $notReferenced = array();
     $missing = array();
- 
+
 foreach ($sections as $sectionID => $sectionDef) {
     foreach ($sectionDef['pages'] as $pageID => $pageDef) {
         $file = $sectionDef['basename'].$pageID.'.php';
-            
+
         array_push($knownExamples, $file);
-            
+
         if (!file_exists('../'.$file)) {
             array_push($missing, $file);
         }
     }
 }
- 
+
     $d = dir('../');
 while (false !== ($entry = $d->read())) {
     if (stristr($entry, 'example_') && stristr($entry, '.php') && !in_array($entry, $knownExamples)) {
@@ -49,7 +47,7 @@ if (empty($notReferenced)) {
 } else {
     echo implode('<br>', $notReferenced);
 }
-    
+
     echo '<br/><br/><b>The following examples are missing:</b><br/><br/>';
 if (empty($missing)) {
     echo '<i>none</i>';

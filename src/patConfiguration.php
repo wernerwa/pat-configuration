@@ -2,8 +2,6 @@
 /**
  * patConfiguration
  *
- * $Id: patConfiguration.php 54 2006-02-03 08:01:11Z argh $
- *
  * Abstracts access to configuration files.
  * Currently XML, WDDX, INI and PHP files are
  * supported.

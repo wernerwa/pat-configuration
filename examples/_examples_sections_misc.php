@@ -2,8 +2,6 @@
 /**
  * Definitions for the examples on misc features of patConfiguration
  *
- * $Id: _examples_sections_misc.php 34 2005-03-05 16:55:02Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

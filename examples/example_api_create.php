@@ -2,8 +2,6 @@
 /**
  * patConfiguration example
  *
- * $Id: example_api_create.php 30 2005-03-04 21:35:42Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

@@ -4,8 +4,6 @@
  *
  * used by the patConfiguration object to read XML config files
  *
- * $Id: XML.php 43 2005-04-05 12:08:26Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Reader
  * @author      Stephan Schmidt <schst@php-tools.net>
@@ -20,8 +18,6 @@ define('PATCONFIGURATION_READER_XML_ERROR_RESERVED_TAG', 'PCF::R::XML::1');
  * patConfiguration XML Reader
  *
  * used by the patConfiguration object to read XML config files
- *
- * $Id: XML.php 43 2005-04-05 12:08:26Z schst $
  *
  * @package     patConfiguration
  * @subpackage  Reader

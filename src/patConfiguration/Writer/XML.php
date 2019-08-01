@@ -4,8 +4,6 @@
  *
  * used by the patConfiguration object to write XML config files
  *
- * $Id: XML.php 23 2005-02-05 16:06:09Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Writer
  * @author      Stephan Schmidt <schst@php-tools.net>
@@ -15,8 +13,6 @@
  * patConfiguration writer for XML files
  *
  * used by the patConfiguration object to write XML config files
- *
- * $Id: XML.php 23 2005-02-05 16:06:09Z schst $
  *
  * @package     patConfiguration
  * @subpackage  Writer

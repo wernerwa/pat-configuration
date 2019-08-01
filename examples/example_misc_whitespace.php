@@ -2,8 +2,6 @@
 /**
  * patConfiguration example
  *
- * $Id: example_misc_whitespace.php 29 2005-03-04 21:25:29Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

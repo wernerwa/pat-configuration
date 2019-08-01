@@ -2,8 +2,6 @@
 /**
  * patConfiguration example
  *
- * $Id: example_formats_xml.php 48 2005-04-05 21:27:48Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

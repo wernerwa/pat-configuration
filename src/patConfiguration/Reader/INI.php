@@ -4,8 +4,6 @@
  *
  * used by the patConfiguration object to read INI config files
  *
- * $Id: INI.php 22 2005-02-05 15:50:56Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Reader
  * @author      Stephan Schmidt <schst@php-tools.net>
@@ -15,8 +13,6 @@
  * patConfiguration reader for INI files
  *
  * used by the patConfiguration object to read INI config files
- *
- * $Id: INI.php 22 2005-02-05 15:50:56Z schst $
  *
  * @package     patConfiguration
  * @subpackage  Reader

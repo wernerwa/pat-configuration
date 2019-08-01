@@ -2,8 +2,6 @@
 /**
  * Definitions for the examples of the <define/> tag
  *
- * $Id: _examples_sections_define.php 43 2005-04-05 12:08:26Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

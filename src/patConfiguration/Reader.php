@@ -2,8 +2,6 @@
 /**
  * patConfiguration reader base class
  *
- * $Id: Reader.php 45 2005-04-05 19:48:28Z schst $
- *
  * @package     patConfiguration
  * @subpackage  Reader
  * @author      Stephan Schmidt <schst@php-tools.net>
@@ -13,8 +11,6 @@
 
 /**
  * patConfiguration reader base class
- *
- * $Id: Reader.php 45 2005-04-05 19:48:28Z schst $
  *
  * @package     patConfiguration
  * @subpackage  Reader

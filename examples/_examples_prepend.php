@@ -4,8 +4,6 @@
  * error reporting and initializes the patExampleGen
  * class that manages the whole framework.
  *
- * $Id: _examples_prepend.php 29 2005-03-04 21:25:29Z schst $
- *
  * @package     patExampleGen
  * @subpackage  Examples
  * @author      Sebastian Mordziol <argh@php-tools.net>

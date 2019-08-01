@@ -6,8 +6,6 @@
  * automatically create a package that can be
  * installed via the PEAR installer.
  *
- * $Id: package.php 54 2006-02-03 08:01:11Z argh $
- *
  * @author      Stephan Schmidt <schst@php-tools.net>
  * @package     patConfiguration
  * @subpackage  Tools

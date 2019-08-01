@@ -3,8 +3,6 @@
  * Custom functions for the current examples collection - the functions
  * defined here are available for all examples.
  *
- * $Id: _examples_customFunctions.php 34 2005-03-05 16:55:02Z schst $
- *
  * @access      public
  * @package     patExampleGen
  * @subpackage  Examples

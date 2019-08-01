@@ -4,8 +4,6 @@
  * to set the paths to the needed classes as they
  * should be on your server.
  *
- * $Id: _examples_config.php 34 2005-03-05 16:55:02Z schst $
- *
  * @package     patExampleGen
  * @subpackage  Examples
  * @author      Stephan Schmidt <schst@php-tools.net>

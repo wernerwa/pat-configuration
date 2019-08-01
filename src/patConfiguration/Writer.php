@@ -4,8 +4,6 @@
  *
  * abstract base class for config writers
  *
- * $Id: Writer.php 35 2005-03-06 10:01:02Z schst $
- *
  * @abstract
  * @package     patConfiguration
  * @subpackage  Writer
@@ -16,8 +14,6 @@
  * patConfiguration Writer
  *
  * abstract base class for config writers
- *
- * $Id: Writer.php 35 2005-03-06 10:01:02Z schst $
  *
  * @package     patConfiguration
  * @subpackage  Writer

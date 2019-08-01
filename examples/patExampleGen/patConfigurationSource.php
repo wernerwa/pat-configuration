@@ -2,8 +2,6 @@
 /**
  * Helper script that displays the source string or file
  *
- * $Id: patConfigurationSource.php 31 2005-03-04 21:40:04Z schst $
- *
  * You may pass the following GET parameters to the
  * script:
  *
@@ -17,7 +15,7 @@
 if (!isset($_GET['example'])) {
     die('No example selected.');
 }
-    
+
     $exampleId = $_GET['example'];
 
     $extensions = array(
@@ -37,6 +35,6 @@ if (!isset($_GET['example'])) {
         echo $content;
         exit();
     }
-    
+
     // nothing at all.
     die('There is no configuration file for this example.');
