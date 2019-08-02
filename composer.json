@@ -1,0 +1,25 @@
+{
+	"name": "wernerwa/pat-configuration",
+	"description": "patConfiguration is an interface to read and write different types of configuration files.",
+	"type": "library",
+	"license": "PHP-3.0",
+	"authors": [
+		{
+			"name": "Stephan Schmidt",
+			"email": "schst@php-tools.net"
+		}, {
+			"name": "Werner Wank",
+			"email": "14849239+wernerwa@users.noreply.github.com"
+		}
+	],
+	"autoload": {
+		"psr-0": {
+			"patConfiguration": "src/"
+		}
+	},
+	"require": {
+		"php": ">=4.0.0",
+		"pear/pear-core-minimal": "^1.0",
+		"wernerwa/pat-error":  "^1.1"
+	}
+}
