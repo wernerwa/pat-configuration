@@ -1,5 +1,4 @@
 <?xml version="1.0" standalone="yes"?>
-<!-- $Id: example_api_array.xml 29 2005-03-04 21:25:29Z schst $ -->
 <!DOCTYPE configuration SYSTEM "patConfiguration.dtd">
 <configuration>
 	<path name="foo">

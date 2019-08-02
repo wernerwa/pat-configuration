@@ -1,5 +1,4 @@
 <?xml version="1.0" standalone="yes"?>
-<!-- $Id: heroes.xml 10 2004-07-15 19:32:02Z schst $ -->
 <configuration>
 	<define tag="heroes" type="array"/>
 	<define tag="hero" type="string" name="_attribute" attribute="name" value="realname"/>

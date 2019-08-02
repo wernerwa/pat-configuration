@@ -1,5 +1,4 @@
 <?xml version="1.0" standalone="yes"?>
-<!-- $Id: example_define_children.xml 44 2005-04-05 12:23:08Z schst $ -->
 <configuration>
 	<define tag="foo" type="array">
         <define child="params" type="array"/>

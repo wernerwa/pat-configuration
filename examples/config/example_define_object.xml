@@ -1,13 +1,12 @@
 <?xml version="1.0" standalone="yes"?>
-<!-- $Id: example_define_object.xml 29 2005-03-04 21:25:29Z schst $ -->
 <configuration>
 	<!--
 		Using the content attribute
 	-->
-	
+
 	<define tag="page" type="object" instanceof="page" content="items" name="_attribute" attribute="id"/>
 	<define tag="item" type="string" name="_none"/>
-	
+
 	<page id="foo">
 		<item>one</item>
 		<item>two</item>

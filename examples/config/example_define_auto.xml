@@ -1,8 +1,7 @@
 <?xml version="1.0" standalone="yes"?>
-<!-- $Id: example_define_auto.xml 29 2005-03-04 21:25:29Z schst $ -->
 <!DOCTYPE configuration SYSTEM "patConfiguration.dtd">
 <configuration>
-    <!-- 
+    <!--
         Setting the type will allow patConfiguration
         to guess the type of the value. It will use one of
         the following types:
@@ -13,7 +12,7 @@
         - string
     -->
     <define tag="param" type="auto" name="_attribute" attribute="name"/>
-    
+
     <param name="bool1">true</param>
     <param name="bool2">false</param>
 
@@ -34,5 +33,5 @@
     </param>
 
     <param name="string">This is a string</param>
-    
+
 </configuration>
