@@ -4,8 +4,6 @@
  *
  * used by the patConfiguration object to read XML config files
  *
- * @package     patConfiguration
- * @subpackage  Reader
  * @author      Stephan Schmidt <schst@php-tools.net>
  */
 
@@ -19,104 +17,118 @@ define('PATCONFIGURATION_READER_XML_ERROR_RESERVED_TAG', 'PCF::R::XML::1');
  *
  * used by the patConfiguration object to read XML config files
  *
- * @package     patConfiguration
- * @subpackage  Reader
  * @author      Stephan Schmidt <schst@php-tools.net>
  */
 class patConfiguration_Reader_XML extends patConfiguration_Reader
 {
     /**
      * store path information
+     *
      * @var array
      */
     public $path = array();
 
     /**
      * array that stores configuration from the current file
+     *
      * @var array
      */
     public $conf = array();
 
     /**
      * array that stores all xml parsers
+     *
      * @var array
      */
     public $parsers = array();
 
     /**
      * stack of the namespaces
+     *
      * @var array
      */
     public $nsStack = array();
 
     /**
      * stack for tags that have been found
+     *
      * @var array
      */
     public $tagStack = array();
 
     /**
      * stack of values
+     *
      * @var array
      */
     public $valStack = array();
 
     /**
      * current depth of the stored values, i.e. array depth
+     *
      * @var int
      */
     public $valDepth = 1;
 
     /**
      * current CDATA found
+     *
      * @var string
      */
     public $data = array();
 
     /**
      * all open files
+     *
      * @var array
      */
     public $xmlFiles = array();
 
     /**
      * treatment of whitespace
+     *
      * @var string
      */
     public $whitespace = array('default');
 
     /**
      * current namespace for define
+     *
      * @var string
      */
     public $currentNamespace = '_none';
 
     /**
      * current tag for define
+     *
      * @var string
      */
-    public $currentTag  = false;
+    public $currentTag = false;
 
     /**
      * stack for define tags
+     *
      * @var array
      */
     public $defineStack = array();
 
     /**
      * files that have been included
-     * @var array   $includedFiles
+     *
+     * @var array
      */
     public $includedFiles = array();
 
     /**
      * list of all files that were needed
-     * @var array   $externalFiles
+     *
+     * @var array
      */
     public $externalFiles = array();
 
     /**
      * reserved tags
+     *
      * @var array
      */
     public $reservedTags = array('configuration', 'configValue', 'define', 'getConfigValue', 'path');
@@ -124,10 +136,10 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * load configuration from a file
      *
-     * @access  public
-     * @param   string  $configFile     full path of the config file
-     * @param   array   $options        various options, depending on the reader
-     * @return  array   $config         complete configuration
+     * @param string $configFile full path of the config file
+     * @param array  $options    various options, depending on the reader
+     *
+     * @return array $config         complete configuration
      */
     public function loadConfigFile($configFile, $options = array())
     {
@@ -143,14 +155,13 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         return  array(
                         'config'        => $this->conf,
                         'externalFiles' => $this->externalFiles,
-                        'cacheAble'     => true
+                        'cacheAble'     => true,
                     );
     }
 
     /**
      * set defined tags
      *
-     * @access  public
      * @param   array
      */
     public function setDefinedTags($tags, $ns = null)
@@ -160,6 +171,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         } else {
             $this->definedTags[$ns] = $tags;
         }
+
         return true;
     }
 
@@ -185,8 +197,8 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         array_push($this->tagStack, $name);
         array_push($this->nsStack, $ns);
 
-        $tagDepth               =   count($this->tagStack);
-        $this->data[$tagDepth]  =   null;
+        $tagDepth = count($this->tagStack);
+        $this->data[$tagDepth] = null;
 
         // inherit whitespace treatment
         if (!isset($attributes['xml:space'])) {
@@ -255,8 +267,8 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                         $attributes['name'] = false;
                     }
                     //  store name and type of value
-                    $val = @array( 'type' => $attributes['type'],
-                                   'name' => $attributes['name']
+                    $val = @array('type'  => $attributes['type'],
+                                   'name' => $attributes['name'],
                                 );
                     if ($val['type'] == 'object') {
                         if (isset($attributes['instanceof'])) {
@@ -285,17 +297,19 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         // check, whether the namespace has been defined.
         if (!isset($this->definedTags[$ns])) {
             $this->addToPath($name);
+
             return true;
         }
 
         //  check whether the tag has been defined
         if (!isset($this->definedTags[$ns][$name])) {
             $this->addToPath($name);
+
             return true;
         }
 
-        $def     = $this->definedTags[$ns][$name];
-        $type    = $def['type'];
+        $def = $this->definedTags[$ns][$name];
+        $type = $def['type'];
         $tagName = $def['name'];
 
         if ($tagName == '_attribute') {
@@ -309,7 +323,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         //  store name and type of value
         $val = array(
                       'type' => $type,
-                      'name' => $tagName
+                      'name' => $tagName,
                     );
 
         // set the classname if creating an object
@@ -329,7 +343,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             // attributes are used as value
         } elseif (isset($def['attributes']) && is_array($def['attributes'])) {
             //  value must be an array
-            $value  =   array();
+            $value = array();
             //  check, which attributes exist
             foreach ($def['attributes'] as $name => $attDef) {
                 if (isset($attributes[$name])) {
@@ -356,14 +370,13 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             }
         }
 
-
         $this->valDepth = array_push($this->valStack, $val);
 
         if (isset($def['content'])) {
             $val = array(
                         'type'    => 'auto',
                         'name'    => $def['content'],
-                        '_isAuto' => true
+                        '_isAuto' => true,
                         );
 
             $this->valDepth = array_push($this->valStack, $val);
@@ -404,7 +417,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         $this->data[$tagDepth] = '';
 
         //  remove namespace from stack
-        $ns   = array_pop($this->nsStack);
+        $ns = array_pop($this->nsStack);
         //  remove tag from stack
         $name = array_pop($this->tagStack);
 
@@ -443,7 +456,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                     $val = array_pop($this->valStack);
 
                     //  decrement depth, as one tag was removed from stack
-                    $this->valDepth--;
+                    --$this->valDepth;
 
                     //  if no value was found (e.g. other tags inside)
                     //  use CDATA that was found between the tags
@@ -475,6 +488,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             }
             //  shorten path
             $this->removeLastFromPath();
+
             return true;
         }
 
@@ -482,7 +496,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         $val = array_pop($this->valStack);
 
         //  decrement depth, as one tag was removed from stack
-        $this->valDepth--;
+        --$this->valDepth;
 
         //  if no value was found (e.g. other tags inside)
         //  use CDATA that was found between the tags
@@ -511,7 +525,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             $val = array_pop($this->valStack);
 
             //  decrement depth, as one tag was removed from stack
-            $this->valDepth--;
+            --$this->valDepth;
 
             //  if no value was found (e.g. other tags inside)
             //  use CDATA that was found between the tags
@@ -526,6 +540,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
 
             $this->setTypeValue($val['value'], $val['type'], $val['name'], $options);
         }
+
         return true;
     }
 
@@ -533,8 +548,8 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
      * handle character data
      * if the character data was found between tags using namespaces, the appropriate namesapce handler will be called
      *
-     * @param   int     $parser     resource id of the current parser
-     * @param   string  $data       character data, that was found
+     * @param int    $parser resource id of the current parser
+     * @param string $data   character data, that was found
      */
     public function characterData($parser, $data)
     {
@@ -550,9 +565,9 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * add element to path
      *
-     * @access  private
-     * @param   string  $key    element that should be appended to path
-     * @return   integer
+     * @param string $key element that should be appended to path
+     *
+     * @return int
      */
     public function addToPath($key)
     {
@@ -562,8 +577,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * remove last element from path
      *
-     * @access  private
-     * @return   string
+     * @return string
      */
     public function removeLastFromPath()
     {
@@ -573,8 +587,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * set value for the current path
      *
-     * @access  private
-     * @param   mixed   $value  value that should be set
+     * @param mixed $value value that should be set
      */
     public function setValue($value)
     {
@@ -586,8 +599,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
      * returns the current data between the open tags
      * data can be anything, from strings, to arrays or objects
      *
-     * @access  private
-     * @return  mixed   $value  data between text
+     * @return mixed $value  data between text
      */
     public function getData()
     {
@@ -597,7 +609,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * append Data to the current data
      *
-     * @param   mixed   $data   data to be appended
+     * @param mixed $data data to be appended
      */
     public function appendData($data)
     {
@@ -612,12 +624,12 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             if (is_string($data)) {
                 $this->data[$tagDepth] .= $data;
             } else {
-                $this->data[$tagDepth]  = array( $this->data[$tagDepth], $data );
+                $this->data[$tagDepth] = array($this->data[$tagDepth], $data);
             }
         } elseif (is_array($this->data[$tagDepth])) {
             // add an array to the array
             if (is_array($data)) {
-                $this->data[$tagDepth]  = array_merge($this->data[$tagDepth], $data);
+                $this->data[$tagDepth] = array_merge($this->data[$tagDepth], $data);
             } else {
                 array_push($this->data[$tagDepth], $data);
             }
@@ -629,7 +641,6 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * convert a value to a certain type ans set it for the current path
      *
-     * @access  private
      * @param   mixed       value that should be set
      * @param   string      type of the value (string, bool, integer, double)
      * @param   array       optional options for the conversion
@@ -643,13 +654,13 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         // insert current value into parent array
         if (count($this->valStack) > 0) {
             if ($name) {
-                $this->valStack[($this->valDepth-1)]['value'][$name] = $value;
+                $this->valStack[($this->valDepth - 1)]['value'][$name] = $value;
             } else {
-                $this->valStack[($this->valDepth-1)]['value'][]      = $value;
+                $this->valStack[($this->valDepth - 1)]['value'][] = $value;
             }
         } else {
             //  No valuestack
-            if (isset($this->nsStack[(count($this->nsStack)-1)]) && $this->nsStack[(count($this->nsStack)-1)]) {
+            if (isset($this->nsStack[(count($this->nsStack) - 1)]) && $this->nsStack[(count($this->nsStack) - 1)]) {
                 $this->appendData($value);
             } else {
                 if ($name) {
@@ -668,8 +679,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * define a new namespace
      *
-     * @access  private
-     * @param   string  $namespace
+     * @param string $namespace
      */
     public function _defineNamespace($namespace)
     {
@@ -685,16 +695,16 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                 'Cannot redefine namespace '.$namespace.' on line '.$line.' in '.$file
             );
         }
-        $this->definedTags[$namespace]  =   array();
-        $this->currentNamespace         =   $namespace;
+        $this->definedTags[$namespace] = array();
+        $this->currentNamespace = $namespace;
+
         return  true;
     }
 
     /**
      * define a new tag
      *
-     * @access  private
-     * @param   array   $attributes
+     * @param array $attributes
      */
     public function _defineTag($attributes)
     {
@@ -718,15 +728,15 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         } else {
             switch ($attributes['name']) {
                 case '_none':
-                    $tagName       = null;
+                    $tagName = null;
                     $nameAttribute = null;
                     break;
                 case '_attribute':
-                    $tagName       = '_attribute';
+                    $tagName = '_attribute';
                     $nameAttribute = $attributes['attribute'];
                     break;
                 default:
-                    $tagName       = $attributes['name'];
+                    $tagName = $attributes['name'];
                     $nameAttribute = null;
                     break;
             }
@@ -734,7 +744,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
 
         $this->definedTags[$ns][$tag] = array(
                                                'type' => $attributes['type'],
-                                               'name' => $tagName
+                                               'name' => $tagName,
                                             );
         if (isset($attributes['value'])) {
             $this->definedTags[$ns][$tag]['value'] = $attributes['value'];
@@ -757,14 +767,14 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         }
 
         $this->currentTag = $tag;
+
         return  true;
     }
 
     /**
      * define a new attribute
      *
-     * @access  private
-     * @param   array   $attributes
+     * @param array $attributes
      */
     public function _defineAttribute($attributes)
     {
@@ -773,17 +783,18 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             return  false;
         }
         if ($this->currentTag === false) {
-            $line   =   $this->_getCurrentLine();
-            $file   =   $this->_getCurrentFile();
+            $line = $this->_getCurrentLine();
+            $file = $this->_getCurrentFile();
 
-            $this->currentNamespace     =   false;
+            $this->currentNamespace = false;
+
             return patErrorManager::raiseError(
                 PATCONFIGURATION_ERROR_CONFIG_INVALID,
                 'Cannot define attribute outside a tag on line '.$line.' in '.$file
             );
         }
 
-        $ns  = $this->currentNamespace;
+        $ns = $this->currentNamespace;
         $tag = $this->currentTag;
 
         if (!isset($this->definedTags[$ns][$tag]['attributes'])) {
@@ -791,7 +802,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         }
 
         $this->definedTags[$ns][$tag]['attributes'][$attributes['attribute']] = array(
-                                                                                        'type'  =>  $attributes['type']
+                                                                                        'type'  => $attributes['type'],
                                                                                     );
 
         if (isset($attributes['default'])) {
@@ -804,8 +815,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * define a new child
      *
-     * @access  private
-     * @param   array   $attributes
+     * @param array $attributes
      */
     public function _defineChild($attributes)
     {
@@ -814,25 +824,26 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             return  false;
         }
         if ($this->currentTag === false) {
-            $line   =   $this->_getCurrentLine();
-            $file   =   $this->_getCurrentFile();
+            $line = $this->_getCurrentLine();
+            $file = $this->_getCurrentFile();
 
             $this->currentNamespace = false;
+
             return patErrorManager::raiseError(
                 PATCONFIGURATION_ERROR_CONFIG_INVALID,
                 'Cannot define child outside a tag on line '.$line.' in '.$file
             );
         }
 
-        $ns  = $this->currentNamespace;
+        $ns = $this->currentNamespace;
         $tag = $this->currentTag;
 
         if (!isset($this->definedTags[$ns][$tag]['children'])) {
-            $this->definedTags[$ns][$tag]['children']   = array();
+            $this->definedTags[$ns][$tag]['children'] = array();
         }
 
         $this->definedTags[$ns][$tag]['children'][$attributes['child']] = array(
-                                                                                 'type' => $attributes['type']
+                                                                                 'type' => $attributes['type'],
                                                                                 );
 
         if (isset($attributes['default'])) {
@@ -845,11 +856,11 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * parse an external entity
      *
-     * @param   int     $parser             resource id of the current parser
-     * @param   string  $openEntityNames    space-separated list of the names of the entities that are open for the parse of this entity (including the name of the referenced entity)
-     * @param   string  $base               currently empty string
-     * @param   string  $systemId           system identifier as specified in the entity declaration
-     * @param   string  $publicId           publicId, is the public identifier as specified in the entity declaration, or an empty string if none was specified; the whitespace in the public identifier will have been normalized as required by the XML spec
+     * @param int    $parser          resource id of the current parser
+     * @param string $openEntityNames space-separated list of the names of the entities that are open for the parse of this entity (including the name of the referenced entity)
+     * @param string $base            currently empty string
+     * @param string $systemId        system identifier as specified in the entity declaration
+     * @param string $publicId        publicId, is the public identifier as specified in the entity declaration, or an empty string if none was specified; the whitespace in the public identifier will have been normalized as required by the XML spec
      */
     public function externalEntity($parser, $openEntityNames, $base, $systemId, $publicId)
     {
@@ -858,15 +869,15 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             array_push($this->externalFiles, $file);
             $this->parseXMLFile($file);
         }
+
         return  true;
     }
 
     /**
      * get all files in a directory
      *
-     * @access  private
-     * @param   string  $dir
-     * @param   string  $ext    file extension
+     * @param string $dir
+     * @param string $ext file extension
      */
     public function getFilesInDir($dir, $ext)
     {
@@ -881,7 +892,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                 continue;
             }
 
-            if (is_dir($dir . '/' . $entry)) {
+            if (is_dir($dir.'/'.$entry)) {
                 continue;
             }
 
@@ -889,7 +900,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                 continue;
             }
 
-            array_push($files, $dir. '/' . $entry);
+            array_push($files, $dir.'/'.$entry);
         }
 
         return  $files;
@@ -900,9 +911,9 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
      *
      * if no path is given, all config values will be returnded in an array
      *
-     * @access  public
-     * @param   string  $path   path, where the value is stored
-     * @return  mixed   $value  value
+     * @param string $path path, where the value is stored
+     *
+     * @return mixed $value  value
      */
     public function getConfigValue($path = '')
     {
@@ -911,22 +922,23 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
         }
 
         if (strstr($path, '*')) {
-            $path   = str_replace('.', '\.', $path).'$';
-            $path   = '^'.str_replace('*', '.*', $path).'$';
+            $path = str_replace('.', '\.', $path).'$';
+            $path = '^'.str_replace('*', '.*', $path).'$';
             $values = array();
             foreach ($this->conf as $key => $value) {
                 if (preg_match("#$path#i", $key)) {
-                    $values[$key]   =   $value;
+                    $values[$key] = $value;
                 }
             }
+
             return  $values;
         }
 
         //  check whether a value of an array was requested
         if ($index = strrchr($path, '[')) {
-            $path  = substr($path, 0, strrpos($path, '['));
+            $path = substr($path, 0, strrpos($path, '['));
             $index = substr($index, 1, (strlen($index) - 2));
-            $tmp   = $this->getConfigValue($path);
+            $tmp = $this->getConfigValue($path);
 
             return  $tmp[$index];
         }
@@ -942,14 +954,15 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
      * parse an external xml file
      *
      * @param   string      filename, without dirname
-     * @return  boolean     true on success, patError on failure
+     *
+     * @return bool true on success, patError on failure
      */
     public function parseXMLFile($file)
     {
         //  add it to included files
         array_push($this->includedFiles, $file);
 
-        $parserCount                 = count($this->parsers);
+        $parserCount = count($this->parsers);
         $this->parsers[$parserCount] = $this->createParser();
 
         if (!($fp = @fopen($file, 'r'))) {
@@ -997,44 +1010,44 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * get the current xml parser object
      *
-     * @access  private
-     * @return  resource    $parser
+     * @return resource $parser
      */
     public function &_getCurrentParser()
     {
         $parserCount = count($this->parsers) - 1;
+
         return $this->parsers[$parserCount];
     }
 
     /**
      * get the current line number
      *
-     * @access  private
-     * @return  int $line
+     * @return int $line
      */
     public function _getCurrentLine()
     {
         $parser = &$this->_getCurrentParser();
-        $line   = xml_get_current_line_number($parser);
+        $line = xml_get_current_line_number($parser);
+
         return $line;
     }
 
     /**
      * get the current file
      *
-     * @access  private
-     * @return  string $file
+     * @return string $file
      */
     public function _getCurrentFile()
     {
-        $file = $this->xmlFiles[(count($this->xmlFiles)-1)];
+        $file = $this->xmlFiles[(count($this->xmlFiles) - 1)];
+
         return $file;
     }
 
     /**
      * create a parser
      *
-     * @return  object  $parser
+     * @return object $parser
      */
     public function createParser()
     {
@@ -1047,9 +1060,9 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
             xml_set_character_data_handler($parser, 'characterData');
             xml_set_external_entity_ref_handler($parser, 'externalEntity');
         } else {
-            xml_set_element_handler($parser, array( $this, 'startElement' ), array( $this, 'endElement' ));
-            xml_set_character_data_handler($parser, array( $this, 'characterData' ));
-            xml_set_external_entity_ref_handler($parser, array( $this, 'externalEntity' ));
+            xml_set_element_handler($parser, array($this, 'startElement'), array($this, 'endElement'));
+            xml_set_character_data_handler($parser, array($this, 'characterData'));
+            xml_set_external_entity_ref_handler($parser, array($this, 'externalEntity'));
         }
 
         xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, false);
@@ -1060,13 +1073,12 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
     /**
      * include an xml file or directory
      *
-     * @access  private
      * @param   array   options (=attributes of the tag)
      */
     public function _xInclude($options)
     {
         if (!isset($options['once'])) {
-            $options['once']    =   'no';
+            $options['once'] = 'no';
         }
 
         if (!isset($options['relativeTo'])) {
@@ -1113,6 +1125,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                 $this->parseXMLFile($file);
             }
         }
+
         return  true;
     }
 }
