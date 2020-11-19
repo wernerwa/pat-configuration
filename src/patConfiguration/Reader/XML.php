@@ -621,7 +621,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
 
         if (is_string($this->data[$tagDepth])) {
             //  append string
-            if (is_string($data)) {
+            if (is_string($data) || $data === false) {
                 $this->data[$tagDepth] .= $data;
             } else {
                 $this->data[$tagDepth] = array($this->data[$tagDepth], $data);
