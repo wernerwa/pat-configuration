@@ -552,33 +552,7 @@ class patConfiguration
      */
     public function &_loadDriver($filetype, $mode = 'Reader')
     {
-        // include the base class
-        $baseFile = sprintf('%s/%s.php', $this->getDriverDir(), $mode);
-        include_once $baseFile;
-
-        $driverFile = sprintf('%s/%s/%s.php', $this->getDriverDir(), $mode, strtoupper($filetype));
         $driverClass = sprintf('patConfiguration_%s_%s', $mode, strtoupper($filetype));
-
-        //  check whether writer file exists
-        if (!file_exists($driverFile)) {
-            return patErrorManager::raiseError(
-                PATCONFIGURATION_ERROR_UNKNOWN_DRIVER,
-                'Could not load '.$mode.' for "'.$filetype.'". Note that patConfiguration '.
-                'determines the filetype from the file\'s extension, so if you use an exotic '.
-                'extension you should set the "filetype" option in your method call (you can '.
-                'do this with the loadConfigFile() and loadCachedConfigFile() methods.)'
-            );
-        }
-        //  include writer
-        include_once $driverFile;
-
-        //  check whether writer class exists
-        if (!class_exists($driverClass)) {
-            return patErrorManager::raiseError(
-                PATCONFIGURATION_ERROR_CORRUPT_DRIVER,
-                '$mode for \''.$filetype.'\' seems to be corrupt.'
-            );
-        }
 
         //  create Writer object
         $driver = new $driverClass();
