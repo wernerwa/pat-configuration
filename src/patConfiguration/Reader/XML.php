@@ -267,7 +267,7 @@ class patConfiguration_Reader_XML extends patConfiguration_Reader
                         $attributes['name'] = false;
                     }
                     //  store name and type of value
-                    $val = @array('type'  => $attributes['type'],
+                    $val = array('type'  => isset($attributes['type']) ? $attributes['type'] : null,
                                    'name' => $attributes['name'],
                                 );
                     if ($val['type'] == 'object') {
